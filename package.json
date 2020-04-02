@@ -1,0 +1,68 @@
+{
+  "name": "@moxy/react-page-swapper",
+  "version": "0.0.0",
+  "description": "An orchestrator that eases out the implementation of page transitions",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "lib",
+    "es"
+  ],
+  "homepage": "https://github.com/moxystudio/react-page-swapper#readme",
+  "author": "André Cruz <andre@moxy.studio>",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "page",
+    "animation",
+    "transition",
+    "orchestrator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moxystudio/react-page-swapper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/moxystudio/react-page-swapper/issues"
+  },
+  "scripts": {
+    "build:commonjs": "BABEL_ENV=commonjs babel src-tmp -d lib --delete-dir-on-start",
+    "build:es": "BABEL_ENV=es babel src-tmp -d es --delete-dir-on-start",
+    "build": "npm run build:commonjs && npm run build:es",
+    "test": "jest",
+    "lint": "eslint --ignore-path .gitignore .",
+    "prerelease": "npm t && npm run lint && npm run build",
+    "release": "standard-version",
+    "postrelease": "git push --follow-tags origin HEAD && npm publish"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "once": "^1.4.0",
+    "prop-types": "^15.7.2",
+    "react-transition-group": "^4.3.0",
+    "shallowequal": "^1.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@commitlint/config-conventional": "^8.0.0",
+    "@moxy/babel-preset": "^3.2.1",
+    "@moxy/eslint-config-babel": "^12.0.0",
+    "@moxy/eslint-config-base": "^12.0.0",
+    "@moxy/eslint-config-jest": "^12.0.0",
+    "@moxy/eslint-config-react": "^12.0.0",
+    "@moxy/jest-config": "^4.0.1",
+    "@testing-library/react": "^10.0.2",
+    "commitlint": "^8.3.5",
+    "eslint": "^6.0.0",
+    "husky": "^4.0.10",
+    "jest": "^25.2.6",
+    "lint-staged": "^10.0.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "standard-version": "^7.0.0"
+  }
+}
