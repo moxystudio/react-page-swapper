@@ -1,0 +1,10 @@
+html {
+    min-width: 320px;
+}
+
+body {
+    margin: 0;
+    overflow-y: visible;
+    overflow-x: hidden;
+    background-color: #244444;
+}

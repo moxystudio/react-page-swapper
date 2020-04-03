@@ -1,0 +1,118 @@
+.fade {
+    will-change: opacity;
+    transition: opacity 0.6s;
+
+    &.enter {
+        opacity: 0;
+    }
+
+    &.enterActive,
+    &.enterDone {
+        opacity: 1;
+    }
+
+    &.exitActive,
+    &.exitDone {
+        opacity: 0;
+    }
+}
+
+.slideLeft {
+    transition: transform 0.6s;
+    transform-style: preserve-3d; /* Necessary to performance on Firefox */
+
+    &.enter {
+        transform: translateX(100vw);
+    }
+
+    &.enterActive,
+    &.enterDone {
+        transform: translateX(0);
+    }
+
+    &.exit {
+        transform: translateX(0);
+        z-index: -1;
+    }
+
+    &.exitActive,
+    &.exitDone {
+        transform: translateX(-25vw);
+    }
+}
+
+.slideRight {
+    transition: transform 0.6s;
+    transform-style: preserve-3d; /* Necessary to performance on Firefox */
+
+    &.enter {
+        transform: translateX(-100vw);
+    }
+
+    &.enterActive,
+    &.enterDone {
+        transform: translateX(0);
+    }
+
+    &.exit {
+        transform: translateX(0);
+        z-index: -1;
+    }
+
+    &.exitActive,
+    &.exitDone {
+        transform: translateX(25vw);
+    }
+}
+
+.slideUpScale {
+    will-change: transform;
+    transition: transform 0.6s;
+    transform-origin: center center;
+    transform-style: preserve-3d; /* Necessary to performance on Firefox */
+
+    &.enter {
+        transform: scale(0.75);
+        z-index: -1;
+    }
+
+    &.enterActive,
+    &.enterDone {
+        transform: scale(1);
+    }
+
+    &.exit {
+        transform: translateY(0);
+    }
+
+    &.exitActive,
+    &.exitDone {
+        transform: translateY(-100vh);
+    }
+}
+
+.slideDownScale {
+    will-change: transform;
+    transition: transform 0.6s;
+    transform-origin: center center;
+    transform-style: preserve-3d; /* Necessary to performance on Firefox */
+
+    &.enter {
+        transform: scale(0.75);
+        z-index: -1;
+    }
+
+    &.enterActive,
+    &.enterDone {
+        transform: scale(1);
+    }
+
+    &.exit {
+        transform: translateY(0);
+    }
+
+    &.exitActive,
+    &.exitDone {
+        transform: translateY(100vh);
+    }
+}
