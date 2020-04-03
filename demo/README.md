@@ -1,6 +1,13 @@
 # Demo
 
-This project uses [Next.js](https://nextjs.org/)
+This project uses [Next.js](https://nextjs.org/) and may be accessed at https://moxystudio.github.io/react-page-swapper/.
+
+Execute the following commands to run the demo locally:
+
+```sh
+npm i
+npm run dev
+```
 
 ## Testing changes locally
 
