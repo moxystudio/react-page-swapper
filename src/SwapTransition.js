@@ -28,21 +28,29 @@ export default class SwapTransition extends Component {
         if (!props.in && state.props.in && state.myself) {
             const node = findDOMNode(state.myself);
 
-            style = !node ? {} : {
-                position: 'fixed',
-                top: node.getBoundingClientRect().top,
-                left: node.getBoundingClientRect().left,
-                width: parseInt(getComputedStyle(node).width, 10),
-                height: parseInt(getComputedStyle(node).height, 10),
-                pointerEvents: 'none',
-            };
-        } else {
-            style = {};
+            if (node) {
+                const width = parseInt(getComputedStyle(node).width, 10);
+                const height = parseInt(getComputedStyle(node).height, 10);
+                const { top, left } = node.getBoundingClientRect();
+                const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
+                const clipPath = `polygon(${-left + windowWidth}px ${-top}px, ${-left + windowWidth}px ${-top + windowHeight}px, ${-left}px ${-top + windowHeight}px, ${-left}px ${-top}px)`;
+
+                style = {
+                    position: 'fixed',
+                    top,
+                    left,
+                    width,
+                    height,
+                    pointerEvents: 'none',
+                    clipPath,
+                    WebkitClipPath: clipPath,
+                };
+            }
         }
 
         return {
             props: pick(props, PROP_NAMES),
-            style,
+            style: style ?? { position: 'relative' },
         };
     }
 

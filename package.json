@@ -26,8 +26,8 @@
     "url": "https://github.com/moxystudio/react-page-swapper/issues"
   },
   "scripts": {
-    "build:commonjs": "BABEL_ENV=commonjs babel src-tmp -d lib --delete-dir-on-start",
-    "build:es": "BABEL_ENV=es babel src-tmp -d es --delete-dir-on-start",
+    "build:commonjs": "BABEL_ENV=commonjs babel src -d lib --delete-dir-on-start",
+    "build:es": "BABEL_ENV=es babel src -d es --delete-dir-on-start",
     "build": "npm run build:commonjs && npm run build:es",
     "test": "jest",
     "lint": "eslint --ignore-path .gitignore .",

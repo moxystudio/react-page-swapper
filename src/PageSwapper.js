@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import once from 'once';
+import PropTypes from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
+import once from 'once';
 import SwapTransition from './SwapTransition';
 import lockSize from './lock-size';
 import { getRandomNodeKey } from './node-key';
@@ -31,6 +31,10 @@ export default class PageSwapper extends Component {
         if (this.isOutOfSync() && !this.isSwapping()) {
             this.beginSwap();
         }
+    }
+
+    componentWillUnmount() {
+        this.unlockBodySize?.();
     }
 
     render() {
@@ -90,24 +94,22 @@ export default class PageSwapper extends Component {
         this.remainingSwapAcks = 2;
         this.unlockBodySize = lockSize(document.body);
 
-        onSwapBegin && onSwapBegin();
+        onSwapBegin?.();
 
         const newState = this.buildState();
 
-        if (newState.animation === this.state.animation) {
+        this.setState({
+            animation: newState.animation,
+        }, () => {
             this.setState(newState);
-        } else {
-            this.setState({ animation: newState.animation }, () => {
-                this.setState(newState);
-            });
-        }
+        });
     }
 
     finishSwap() {
         const { onSwapEnd } = this.props;
 
-        this.unlockBodySize();
-        onSwapEnd && onSwapEnd();
+        this.unlockBodySize?.();
+        onSwapEnd?.();
 
         if (this.isOutOfSync()) {
             this.beginSwap();
@@ -115,7 +117,7 @@ export default class PageSwapper extends Component {
     }
 
     handleEntered = (nodeKey) => {
-        if (this.state.nodeKey !== nodeKey) {
+        if (this.state.nodeKey !== nodeKey || !this.isSwapping()) {
             return;
         }
 
@@ -129,7 +131,7 @@ export default class PageSwapper extends Component {
     };
 
     handleExited = (nodeKey) => {
-        if (this.state.prevNodeKey !== nodeKey) {
+        if (this.state.prevNodeKey !== nodeKey || !this.isSwapping()) {
             return;
         }
 
