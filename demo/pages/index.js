@@ -1,13 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Typography } from '@material-ui/core';
-import { AnimationPicker } from '../components';
 import styles from './index.module.css';
 
 const Home = () => (
     <div className={ styles.home }>
-        <AnimationPicker nextHref="/dummy" />
-
         <section className={ classNames(styles.section, styles.section1) }>
             <Typography paragraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc suscipit tincidunt risus, eget tempor libero. Vestibulum tincidunt tortor ac nulla finibus, nec mollis nisl tempor. Vivamus lacus diam, euismod ut tincidunt commodo, scelerisque vel lorem. Nam sit amet sodales dui. Proin fringilla tellus eu posuere auctor. Cras interdum tempus dolor, ut faucibus neque tristique nec. Sed est odio, iaculis ac elementum vitae, sodales at est. Aliquam sed consectetur ipsum. Nam consequat est non porta finibus. Aliquam arcu nunc, euismod ut consequat vitae, tristique ac mi. Ut accumsan felis id elit commodo fermentum.</Typography>
         </section>
