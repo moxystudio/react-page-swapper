@@ -14,5 +14,9 @@ export const getRandomNodeKey = (node) => {
 };
 
 export const getNodeKeyFromPathname = (level, pathname) => {
+    if (!pathname) {
+        pathname = typeof location !== 'undefined' ? location.pathname : '/';
+    }
 
+    return pathname.split('/').slice(0, level + 2).join('/');
 };
