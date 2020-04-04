@@ -240,7 +240,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 /***/ }),
 
 /***/ "./components/page-transition/PageTransition.js":
@@ -416,19 +415,18 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./components/theme-provider/ThemeProvider.js ***!
   \****************************************************/
-/*! exports provided: theme, default */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "theme", function() { return theme; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/colors */ "./node_modules/@material-ui/core/esm/colors/index.js");
-/* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/CssBaseline */ "./node_modules/@material-ui/core/esm/CssBaseline/index.js");
+/* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/CssBaseline */ "./node_modules/@material-ui/core/esm/CssBaseline/index.js");
+/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./theme */ "./components/theme-provider/theme.js");
 var _this = undefined,
     _jsxFileName = "/Users/satazor/Work/moxy.org/react-page-swapper/demo/components/theme-provider/ThemeProvider.js";
 
@@ -437,33 +435,16 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
- // Create a theme instance
 
-var theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["createMuiTheme"])({
-  palette: {
-    primary: {
-      main: '#556cd6'
-    },
-    secondary: {
-      main: '#19857b'
-    },
-    error: {
-      main: _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_3__["red"].A400
-    },
-    background: {
-      "default": '#fff'
-    }
-  }
-});
 
 var ThemeProvider = function ThemeProvider(_ref) {
   var children = _ref.children;
   return __jsx(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["ThemeProvider"], {
-    theme: theme,
+    theme: _theme__WEBPACK_IMPORTED_MODULE_4__["default"],
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26,
+      lineNumber: 8,
       columnNumber: 5
     }
   }, __jsx(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["StylesProvider"], {
@@ -471,14 +452,14 @@ var ThemeProvider = function ThemeProvider(_ref) {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27,
+      lineNumber: 9,
       columnNumber: 9
     }
-  }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, __jsx(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28,
+      lineNumber: 10,
       columnNumber: 13
     }
   }), children));
@@ -503,9 +484,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ThemeProvider */ "./components/theme-provider/ThemeProvider.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _ThemeProvider__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "theme", function() { return _ThemeProvider__WEBPACK_IMPORTED_MODULE_0__["theme"]; });
+/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./theme */ "./components/theme-provider/theme.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "theme", function() { return _theme__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
 
+
+
+/***/ }),
+
+/***/ "./components/theme-provider/theme.js":
+/*!********************************************!*\
+  !*** ./components/theme-provider/theme.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/colors */ "./node_modules/@material-ui/core/esm/colors/index.js");
+
+
+var theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["createMuiTheme"])({
+  palette: {
+    primary: {
+      main: '#556cd6'
+    },
+    secondary: {
+      main: '#19857b'
+    },
+    error: {
+      main: _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_1__["red"].A400
+    },
+    background: {
+      "default": '#fff'
+    }
+  }
+});
+/* harmony default export */ __webpack_exports__["default"] = (theme);
 
 /***/ }),
 
@@ -40375,7 +40391,7 @@ function toVal(mix) {
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
 // Module
-exports.push([module.i, ".AnimationPicker_animationPicker__3HoaT {\n    position: fixed;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    display: flex;\n    flex-direction: column;\n    padding: 16px 30px 16px 30px;\n    background-color: rgba(0, 0, 0, 0.3)\n}\n.AnimationPicker_animationPicker__3HoaT .AnimationPicker_button__2SlpP {\n        width: 200px;\n        margin: 10px;\n    }\n", "",{"version":3,"sources":["/Users/satazor/Work/moxy.org/react-page-swapper/demo/components/animation-picker/AnimationPicker.module.css"],"names":[],"mappings":"AAAA;IACI,eAAe;IACf,QAAQ;IACR,SAAS;IACT,gCAAgC;IAChC,aAAa;IACb,sBAAsB;IACtB,4BAA4B;IAC5B;AAMJ;AAJI;QACI,YAAY;QACZ,YAAY;IAChB","file":"AnimationPicker.module.css","sourcesContent":[".animationPicker {\n    position: fixed;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    display: flex;\n    flex-direction: column;\n    padding: 16px 30px 16px 30px;\n    background-color: color(#000 alpha(0.3));\n\n    & .button {\n        width: 200px;\n        margin: 10px;\n    }\n}\n"]}]);
+exports.push([module.i, ".AnimationPicker_animationPicker__3HoaT {\n    position: fixed;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    display: flex;\n    flex-direction: column;\n    padding: 16px;\n    background-color: rgba(0, 0, 0, 0.3)\n}\n.AnimationPicker_animationPicker__3HoaT .AnimationPicker_button__2SlpP {\n        width: 200px;\n        margin: 10px;\n        background-color: #fff;\n    }\n", "",{"version":3,"sources":["/Users/satazor/Work/moxy.org/react-page-swapper/demo/components/animation-picker/AnimationPicker.module.css"],"names":[],"mappings":"AAAA;IACI,eAAe;IACf,QAAQ;IACR,SAAS;IACT,gCAAgC;IAChC,aAAa;IACb,sBAAsB;IACtB,aAAa;IACb;AAOJ;AALI;QACI,YAAY;QACZ,YAAY;QACZ,sBAAsB;IAC1B","file":"AnimationPicker.module.css","sourcesContent":[".animationPicker {\n    position: fixed;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    display: flex;\n    flex-direction: column;\n    padding: 16px;\n    background-color: color(#000 alpha(0.3));\n\n    & .button {\n        width: 200px;\n        margin: 10px;\n        background-color: #fff;\n    }\n}\n"]}]);
 // Exports
 exports.locals = {
 	"animationPicker": "AnimationPicker_animationPicker__3HoaT",
@@ -40393,10 +40409,9 @@ exports.locals = {
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
 // Module
-exports.push([module.i, ".PageTransition_container__1X9Cc {\n    width: 100%;\n    height: 100%;\n    overflow: hidden;\n}\n\n.PageTransition_fade__2ObpC {\n    will-change: opacity;\n    transition: opacity 0.6s\n}\n\n.PageTransition_fade__2ObpC.PageTransition_enter__8z6yq {\n        opacity: 0;\n    }\n\n.PageTransition_fade__2ObpC.PageTransition_enterActive__3BzXp,\n    .PageTransition_fade__2ObpC.PageTransition_enterDone__SEshm {\n        opacity: 1;\n    }\n\n.PageTransition_fade__2ObpC.PageTransition_exitActive__1nGYR,\n    .PageTransition_fade__2ObpC.PageTransition_exitDone__GIlY9 {\n        opacity: 0;\n    }\n\n.PageTransition_slideLeft__3LW9j {\n    transition: transform 0.6s;\n    transform-style: preserve-3d\n}\n\n.PageTransition_slideLeft__3LW9j.PageTransition_enter__8z6yq {\n        transform: translateX(100vw);\n    }\n\n.PageTransition_slideLeft__3LW9j.PageTransition_enterActive__3BzXp,\n    .PageTransition_slideLeft__3LW9j.PageTransition_enterDone__SEshm {\n        transform: translateX(0);\n    }\n\n.PageTransition_slideLeft__3LW9j.PageTransition_exit__269gm {\n        transform: translateX(0);\n        z-index: -1;\n    }\n\n.PageTransition_slideLeft__3LW9j.PageTransition_exitActive__1nGYR,\n    .PageTransition_slideLeft__3LW9j.PageTransition_exitDone__GIlY9 {\n        transform: translateX(-25vw);\n    }\n\n.PageTransition_slideRight__23WvB {\n    transition: transform 0.6s;\n    transform-style: preserve-3d\n}\n\n.PageTransition_slideRight__23WvB.PageTransition_enter__8z6yq {\n        transform: translateX(-100vw);\n    }\n\n.PageTransition_slideRight__23WvB.PageTransition_enterActive__3BzXp,\n    .PageTransition_slideRight__23WvB.PageTransition_enterDone__SEshm {\n        transform: translateX(0);\n    }\n\n.PageTransition_slideRight__23WvB.PageTransition_exit__269gm {\n        transform: translateX(0);\n        z-index: -1;\n    }\n\n.PageTransition_slideRight__23WvB.PageTransition_exitActive__1nGYR,\n    .PageTransition_slideRight__23WvB.PageTransition_exitDone__GIlY9 {\n        transform: translateX(25vw);\n    }\n\n.PageTransition_slideUpScale__2Q-KW {\n    will-change: transform;\n    transition: transform 0.6s;\n    transform-origin: center center;\n    transform-style: preserve-3d\n}\n\n.PageTransition_slideUpScale__2Q-KW.PageTransition_enter__8z6yq {\n        transform: scale(0.75);\n        z-index: -1;\n    }\n\n.PageTransition_slideUpScale__2Q-KW.PageTransition_enterActive__3BzXp,\n    .PageTransition_slideUpScale__2Q-KW.PageTransition_enterDone__SEshm {\n        transform: scale(1);\n    }\n\n.PageTransition_slideUpScale__2Q-KW.PageTransition_exit__269gm {\n        transform: translateY(0);\n    }\n\n.PageTransition_slideUpScale__2Q-KW.PageTransition_exitActive__1nGYR,\n    .PageTransition_slideUpScale__2Q-KW.PageTransition_exitDone__GIlY9 {\n        transform: translateY(-100vh);\n    }\n\n.PageTransition_slideDownScale__OIr3C {\n    will-change: transform;\n    transition: transform 0.6s;\n    transform-origin: center center;\n    transform-style: preserve-3d\n}\n\n.PageTransition_slideDownScale__OIr3C.PageTransition_enter__8z6yq {\n        transform: scale(0.75);\n        z-index: -1;\n    }\n\n.PageTransition_slideDownScale__OIr3C.PageTransition_enterActive__3BzXp,\n    .PageTransition_slideDownScale__OIr3C.PageTransition_enterDone__SEshm {\n        transform: scale(1);\n    }\n\n.PageTransition_slideDownScale__OIr3C.PageTransition_exit__269gm {\n        transform: translateY(0);\n    }\n\n.PageTransition_slideDownScale__OIr3C.PageTransition_exitActive__1nGYR,\n    .PageTransition_slideDownScale__OIr3C.PageTransition_exitDone__GIlY9 {\n        transform: translateY(100vh);\n    }\n", "",{"version":3,"sources":["/Users/satazor/Work/moxy.org/react-page-swapper/demo/components/page-transition/PageTransition.module.css"],"names":[],"mappings":"AAAA;IACI,WAAW;IACX,YAAY;IACZ,gBAAgB;AACpB;;AAEA;IACI,oBAAoB;IACpB;AAeJ;;AAbI;QACI,UAAU;IACd;;AAEA;;QAEI,UAAU;IACd;;AAEA;;QAEI,UAAU;IACd;;AAGJ;IACI,0BAA0B;IAC1B;AAoBJ;;AAlBI;QACI,4BAA4B;IAChC;;AAEA;;QAEI,wBAAwB;IAC5B;;AAEA;QACI,wBAAwB;QACxB,WAAW;IACf;;AAEA;;QAEI,4BAA4B;IAChC;;AAGJ;IACI,0BAA0B;IAC1B;AAoBJ;;AAlBI;QACI,6BAA6B;IACjC;;AAEA;;QAEI,wBAAwB;IAC5B;;AAEA;QACI,wBAAwB;QACxB,WAAW;IACf;;AAEA;;QAEI,2BAA2B;IAC/B;;AAGJ;IACI,sBAAsB;IACtB,0BAA0B;IAC1B,+BAA+B;IAC/B;AAoBJ;;AAlBI;QACI,sBAAsB;QACtB,WAAW;IACf;;AAEA;;QAEI,mBAAmB;IACvB;;AAEA;QACI,wBAAwB;IAC5B;;AAEA;;QAEI,6BAA6B;IACjC;;AAGJ;IACI,sBAAsB;IACtB,0BAA0B;IAC1B,+BAA+B;IAC/B;AAoBJ;;AAlBI;QACI,sBAAsB;QACtB,WAAW;IACf;;AAEA;;QAEI,mBAAmB;IACvB;;AAEA;QACI,wBAAwB;IAC5B;;AAEA;;QAEI,4BAA4B;IAChC","file":"PageTransition.module.css","sourcesContent":[".container {\n    width: 100%;\n    height: 100%;\n    overflow: hidden;\n}\n\n.fade {\n    will-change: opacity;\n    transition: opacity 0.6s;\n\n    &.enter {\n        opacity: 0;\n    }\n\n    &.enterActive,\n    &.enterDone {\n        opacity: 1;\n    }\n\n    &.exitActive,\n    &.exitDone {\n        opacity: 0;\n    }\n}\n\n.slideLeft {\n    transition: transform 0.6s;\n    transform-style: preserve-3d;\n\n    &.enter {\n        transform: translateX(100vw);\n    }\n\n    &.enterActive,\n    &.enterDone {\n        transform: translateX(0);\n    }\n\n    &.exit {\n        transform: translateX(0);\n        z-index: -1;\n    }\n\n    &.exitActive,\n    &.exitDone {\n        transform: translateX(-25vw);\n    }\n}\n\n.slideRight {\n    transition: transform 0.6s;\n    transform-style: preserve-3d;\n\n    &.enter {\n        transform: translateX(-100vw);\n    }\n\n    &.enterActive,\n    &.enterDone {\n        transform: translateX(0);\n    }\n\n    &.exit {\n        transform: translateX(0);\n        z-index: -1;\n    }\n\n    &.exitActive,\n    &.exitDone {\n        transform: translateX(25vw);\n    }\n}\n\n.slideUpScale {\n    will-change: transform;\n    transition: transform 0.6s;\n    transform-origin: center center;\n    transform-style: preserve-3d;\n\n    &.enter {\n        transform: scale(0.75);\n        z-index: -1;\n    }\n\n    &.enterActive,\n    &.enterDone {\n        transform: scale(1);\n    }\n\n    &.exit {\n        transform: translateY(0);\n    }\n\n    &.exitActive,\n    &.exitDone {\n        transform: translateY(-100vh);\n    }\n}\n\n.slideDownScale {\n    will-change: transform;\n    transition: transform 0.6s;\n    transform-origin: center center;\n    transform-style: preserve-3d;\n\n    &.enter {\n        transform: scale(0.75);\n        z-index: -1;\n    }\n\n    &.enterActive,\n    &.enterDone {\n        transform: scale(1);\n    }\n\n    &.exit {\n        transform: translateY(0);\n    }\n\n    &.exitActive,\n    &.exitDone {\n        transform: translateY(100vh);\n    }\n}\n"]}]);
+exports.push([module.i, ".PageTransition_fade__2ObpC {\n    will-change: opacity;\n    transition: opacity 0.6s\n}\n\n.PageTransition_fade__2ObpC.PageTransition_enter__8z6yq {\n        opacity: 0;\n    }\n\n.PageTransition_fade__2ObpC.PageTransition_enterActive__3BzXp,\n    .PageTransition_fade__2ObpC.PageTransition_enterDone__SEshm {\n        opacity: 1;\n    }\n\n.PageTransition_fade__2ObpC.PageTransition_exitActive__1nGYR,\n    .PageTransition_fade__2ObpC.PageTransition_exitDone__GIlY9 {\n        opacity: 0;\n    }\n\n.PageTransition_slideLeft__3LW9j {\n    transition: transform 0.6s;\n    transform-style: preserve-3d /* Necessary to performance on Firefox */\n}\n\n.PageTransition_slideLeft__3LW9j.PageTransition_enter__8z6yq {\n        transform: translateX(100vw);\n    }\n\n.PageTransition_slideLeft__3LW9j.PageTransition_enterActive__3BzXp,\n    .PageTransition_slideLeft__3LW9j.PageTransition_enterDone__SEshm {\n        transform: translateX(0);\n    }\n\n.PageTransition_slideLeft__3LW9j.PageTransition_exit__269gm {\n        transform: translateX(0);\n        z-index: -1;\n    }\n\n.PageTransition_slideLeft__3LW9j.PageTransition_exitActive__1nGYR,\n    .PageTransition_slideLeft__3LW9j.PageTransition_exitDone__GIlY9 {\n        transform: translateX(-25vw);\n    }\n\n.PageTransition_slideRight__23WvB {\n    transition: transform 0.6s;\n    transform-style: preserve-3d /* Necessary to performance on Firefox */\n}\n\n.PageTransition_slideRight__23WvB.PageTransition_enter__8z6yq {\n        transform: translateX(-100vw);\n    }\n\n.PageTransition_slideRight__23WvB.PageTransition_enterActive__3BzXp,\n    .PageTransition_slideRight__23WvB.PageTransition_enterDone__SEshm {\n        transform: translateX(0);\n    }\n\n.PageTransition_slideRight__23WvB.PageTransition_exit__269gm {\n        transform: translateX(0);\n        z-index: -1;\n    }\n\n.PageTransition_slideRight__23WvB.PageTransition_exitActive__1nGYR,\n    .PageTransition_slideRight__23WvB.PageTransition_exitDone__GIlY9 {\n        transform: translateX(25vw);\n    }\n\n.PageTransition_slideUpScale__2Q-KW {\n    will-change: transform;\n    transition: transform 0.6s;\n    transform-origin: center center;\n    transform-style: preserve-3d /* Necessary to performance on Firefox */\n}\n\n.PageTransition_slideUpScale__2Q-KW.PageTransition_enter__8z6yq {\n        transform: scale(0.75);\n        z-index: -1;\n    }\n\n.PageTransition_slideUpScale__2Q-KW.PageTransition_enterActive__3BzXp,\n    .PageTransition_slideUpScale__2Q-KW.PageTransition_enterDone__SEshm {\n        transform: scale(1);\n    }\n\n.PageTransition_slideUpScale__2Q-KW.PageTransition_exit__269gm {\n        transform: translateY(0);\n    }\n\n.PageTransition_slideUpScale__2Q-KW.PageTransition_exitActive__1nGYR,\n    .PageTransition_slideUpScale__2Q-KW.PageTransition_exitDone__GIlY9 {\n        transform: translateY(-100vh);\n    }\n\n.PageTransition_slideDownScale__OIr3C {\n    will-change: transform;\n    transition: transform 0.6s;\n    transform-origin: center center;\n    transform-style: preserve-3d /* Necessary to performance on Firefox */\n}\n\n.PageTransition_slideDownScale__OIr3C.PageTransition_enter__8z6yq {\n        transform: scale(0.75);\n        z-index: -1;\n    }\n\n.PageTransition_slideDownScale__OIr3C.PageTransition_enterActive__3BzXp,\n    .PageTransition_slideDownScale__OIr3C.PageTransition_enterDone__SEshm {\n        transform: scale(1);\n    }\n\n.PageTransition_slideDownScale__OIr3C.PageTransition_exit__269gm {\n        transform: translateY(0);\n    }\n\n.PageTransition_slideDownScale__OIr3C.PageTransition_exitActive__1nGYR,\n    .PageTransition_slideDownScale__OIr3C.PageTransition_exitDone__GIlY9 {\n        transform: translateY(100vh);\n    }\n", "",{"version":3,"sources":["/Users/satazor/Work/moxy.org/react-page-swapper/demo/components/page-transition/PageTransition.module.css"],"names":[],"mappings":"AAAA;IACI,oBAAoB;IACpB;AAeJ;;AAbI;QACI,UAAU;IACd;;AAEA;;QAEI,UAAU;IACd;;AAEA;;QAEI,UAAU;IACd;;AAGJ;IACI,0BAA0B;IAC1B,2BAA4B,EAAE,wCAAwC;AAoB1E;;AAlBI;QACI,4BAA4B;IAChC;;AAEA;;QAEI,wBAAwB;IAC5B;;AAEA;QACI,wBAAwB;QACxB,WAAW;IACf;;AAEA;;QAEI,4BAA4B;IAChC;;AAGJ;IACI,0BAA0B;IAC1B,2BAA4B,EAAE,wCAAwC;AAoB1E;;AAlBI;QACI,6BAA6B;IACjC;;AAEA;;QAEI,wBAAwB;IAC5B;;AAEA;QACI,wBAAwB;QACxB,WAAW;IACf;;AAEA;;QAEI,2BAA2B;IAC/B;;AAGJ;IACI,sBAAsB;IACtB,0BAA0B;IAC1B,+BAA+B;IAC/B,2BAA4B,EAAE,wCAAwC;AAoB1E;;AAlBI;QACI,sBAAsB;QACtB,WAAW;IACf;;AAEA;;QAEI,mBAAmB;IACvB;;AAEA;QACI,wBAAwB;IAC5B;;AAEA;;QAEI,6BAA6B;IACjC;;AAGJ;IACI,sBAAsB;IACtB,0BAA0B;IAC1B,+BAA+B;IAC/B,2BAA4B,EAAE,wCAAwC;AAoB1E;;AAlBI;QACI,sBAAsB;QACtB,WAAW;IACf;;AAEA;;QAEI,mBAAmB;IACvB;;AAEA;QACI,wBAAwB;IAC5B;;AAEA;;QAEI,4BAA4B;IAChC","file":"PageTransition.module.css","sourcesContent":[".fade {\n    will-change: opacity;\n    transition: opacity 0.6s;\n\n    &.enter {\n        opacity: 0;\n    }\n\n    &.enterActive,\n    &.enterDone {\n        opacity: 1;\n    }\n\n    &.exitActive,\n    &.exitDone {\n        opacity: 0;\n    }\n}\n\n.slideLeft {\n    transition: transform 0.6s;\n    transform-style: preserve-3d; /* Necessary to performance on Firefox */\n\n    &.enter {\n        transform: translateX(100vw);\n    }\n\n    &.enterActive,\n    &.enterDone {\n        transform: translateX(0);\n    }\n\n    &.exit {\n        transform: translateX(0);\n        z-index: -1;\n    }\n\n    &.exitActive,\n    &.exitDone {\n        transform: translateX(-25vw);\n    }\n}\n\n.slideRight {\n    transition: transform 0.6s;\n    transform-style: preserve-3d; /* Necessary to performance on Firefox */\n\n    &.enter {\n        transform: translateX(-100vw);\n    }\n\n    &.enterActive,\n    &.enterDone {\n        transform: translateX(0);\n    }\n\n    &.exit {\n        transform: translateX(0);\n        z-index: -1;\n    }\n\n    &.exitActive,\n    &.exitDone {\n        transform: translateX(25vw);\n    }\n}\n\n.slideUpScale {\n    will-change: transform;\n    transition: transform 0.6s;\n    transform-origin: center center;\n    transform-style: preserve-3d; /* Necessary to performance on Firefox */\n\n    &.enter {\n        transform: scale(0.75);\n        z-index: -1;\n    }\n\n    &.enterActive,\n    &.enterDone {\n        transform: scale(1);\n    }\n\n    &.exit {\n        transform: translateY(0);\n    }\n\n    &.exitActive,\n    &.exitDone {\n        transform: translateY(-100vh);\n    }\n}\n\n.slideDownScale {\n    will-change: transform;\n    transition: transform 0.6s;\n    transform-origin: center center;\n    transform-style: preserve-3d; /* Necessary to performance on Firefox */\n\n    &.enter {\n        transform: scale(0.75);\n        z-index: -1;\n    }\n\n    &.enterActive,\n    &.enterDone {\n        transform: scale(1);\n    }\n\n    &.exit {\n        transform: translateY(0);\n    }\n\n    &.exitActive,\n    &.exitDone {\n        transform: translateY(100vh);\n    }\n}\n"]}]);
 // Exports
 exports.locals = {
-	"container": "PageTransition_container__1X9Cc",
 	"fade": "PageTransition_fade__2ObpC",
 	"enter": "PageTransition_enter__8z6yq",
 	"enterActive": "PageTransition_enterActive__3BzXp",
@@ -40421,7 +40436,7 @@ exports.locals = {
 
 exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
 // Module
-exports.push([module.i, "html {\n    min-width: 320px;\n}\n\nbody {\n    margin: 0;\n    overflow-y: visible;\n    background-color: #244444;\n}\n", "",{"version":3,"sources":["/Users/satazor/Work/moxy.org/react-page-swapper/demo/pages/_app.css"],"names":[],"mappings":"AAAA;IACI,gBAAgB;AACpB;;AAEA;IACI,SAAS;IACT,mBAAmB;IACnB,yBAAyB;AAC7B","file":"_app.css","sourcesContent":["html {\n    min-width: 320px;\n}\n\nbody {\n    margin: 0;\n    overflow-y: visible;\n    background-color: #244444;\n}\n"]}]);
+exports.push([module.i, "html {\n    min-width: 320px;\n}\n\nbody {\n    margin: 0;\n    overflow-y: visible;\n    overflow-x: hidden;\n    background-color: #244444;\n}\n", "",{"version":3,"sources":["/Users/satazor/Work/moxy.org/react-page-swapper/demo/pages/_app.css"],"names":[],"mappings":"AAAA;IACI,gBAAgB;AACpB;;AAEA;IACI,SAAS;IACT,mBAAmB;IACnB,kBAAkB;IAClB,yBAAyB;AAC7B","file":"_app.css","sourcesContent":["html {\n    min-width: 320px;\n}\n\nbody {\n    margin: 0;\n    overflow-y: visible;\n    overflow-x: hidden;\n    background-color: #244444;\n}\n"]}]);
 
 
 /***/ }),
