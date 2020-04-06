@@ -48991,7 +48991,7 @@ if (true) {
 
 /***/ }),
 
-/***/ 4:
+/***/ 2:
 /*!*********************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fpage3&absolutePagePath=%2FUsers%2Fsatazor%2FWork%2Fmoxy.org%2Freact-page-swapper%2Fdemo%2Fpages%2Fpage3.js ***!
   \*********************************************************************************************************************************************************/
@@ -49014,5 +49014,5 @@ module.exports = dll_2adc2403d89adc16ead0;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js"]]]);
+},[[2,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=page3.js.map
