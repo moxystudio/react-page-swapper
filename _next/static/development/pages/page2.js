@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/page3.js"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/page2.js"],{
 
 /***/ "./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js":
 /*!*******************************************************************!*\
@@ -38988,6 +38988,68 @@ var refType = prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.oneOfType([prop_
 
 /***/ }),
 
+/***/ "./node_modules/classnames/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/classnames/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg) && arg.length) {
+				var inner = classNames.apply(null, arg);
+				if (inner) {
+					classes.push(inner);
+				}
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if ( true && module.exports) {
+		classNames.default = classNames;
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {}
+}());
+
+
+/***/ }),
+
 /***/ "./node_modules/clsx/dist/clsx.m.js":
 /*!******************************************!*\
   !*** ./node_modules/clsx/dist/clsx.m.js ***!
@@ -39038,19 +39100,25 @@ function toVal(mix) {
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./pages/page3.module.css":
+/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./pages/page2.module.css":
 /*!***********************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-oneOf-2-1!./node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./pages/page3.module.css ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-oneOf-2-1!./node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./pages/page2.module.css ***!
   \***********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
 // Module
-exports.push([module.i, ".page3_page3__McSIA {\n    min-height: 100vh;\n    padding: 20px;\n    background-color: #1ab99b;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n", "",{"version":3,"sources":["/Users/satazor/Work/moxy.org/react-page-swapper/demo/pages/page3.module.css"],"names":[],"mappings":"AAAA;IACI,iBAAiB;IACjB,aAAa;IACb,yBAAyB;IACzB,aAAa;IACb,mBAAmB;IACnB,uBAAuB;AAC3B","file":"page3.module.css","sourcesContent":[".page3 {\n    min-height: 100vh;\n    padding: 20px;\n    background-color: #1ab99b;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n"]}]);
+exports.push([module.i, ".page2_page2__2yWgU {\n    min-height: 100vh\n}\n.page2_page2__2yWgU .page2_section__OKHw- {\n        padding: 20px;\n        min-height: 400px;\n        overflow: hidden;\n        display: flex;\n        align-items: center;\n        justify-content: center\n    }\n.page2_page2__2yWgU .page2_section__OKHw-.page2_section1__QPxQz {\n            background-color: #a5cd39;\n        }\n.page2_page2__2yWgU .page2_section__OKHw-.page2_section2__R71Ch {\n            background-color: #72814a;\n        }\n.page2_page2__2yWgU .page2_section__OKHw-.page2_section3__v_Apw {\n            background-color: #1ab99b;\n        }\n.page2_page2__2yWgU .page2_section__OKHw-.page2_section4__2CQnS {\n            background-color: #677777;\n        }\n.page2_page2__2yWgU .page2_section__OKHw-.page2_section5__lpA5J {\n            background-color: #5bb2b9;\n        }\n", "",{"version":3,"sources":["/Users/satazor/Work/moxy.org/react-page-swapper/demo/pages/page2.module.css"],"names":[],"mappings":"AAAA;IACI;AA8BJ;AA5BI;QACI,aAAa;QACb,iBAAiB;QACjB,gBAAgB;QAChB,aAAa;QACb,mBAAmB;QACnB;IAqBJ;AAnBI;YACI,yBAAyB;QAC7B;AAEA;YACI,yBAAyB;QAC7B;AAEA;YACI,yBAAyB;QAC7B;AAEA;YACI,yBAAyB;QAC7B;AAEA;YACI,yBAAyB;QAC7B","file":"page2.module.css","sourcesContent":[".page2 {\n    min-height: 100vh;\n\n    & .section {\n        padding: 20px;\n        min-height: 400px;\n        overflow: hidden;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n\n        &.section1 {\n            background-color: #a5cd39;\n        }\n\n        &.section2 {\n            background-color: #72814a;\n        }\n\n        &.section3 {\n            background-color: #1ab99b;\n        }\n\n        &.section4 {\n            background-color: #677777;\n        }\n\n        &.section5 {\n            background-color: #5bb2b9;\n        }\n    }\n}\n"]}]);
 // Exports
 exports.locals = {
-	"page3": "page3_page3__McSIA"
+	"page2": "page2_page2__2yWgU",
+	"section": "page2_section__OKHw-",
+	"section1": "page2_section1__QPxQz",
+	"section2": "page2_section2__R71Ch",
+	"section3": "page2_section3__v_Apw",
+	"section4": "page2_section4__2CQnS",
+	"section5": "page2_section5__lpA5J"
 };
 
 /***/ }),
@@ -43064,21 +43132,21 @@ module.exports = (__webpack_require__(/*! dll-reference dll_2adc2403d89adc16ead0
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fpage3&absolutePagePath=%2FUsers%2Fsatazor%2FWork%2Fmoxy.org%2Freact-page-swapper%2Fdemo%2Fpages%2Fpage3.js!./":
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fpage2&absolutePagePath=%2FUsers%2Fsatazor%2FWork%2Fmoxy.org%2Freact-page-swapper%2Fdemo%2Fpages%2Fpage2.js!./":
 /*!*****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fpage3&absolutePagePath=%2FUsers%2Fsatazor%2FWork%2Fmoxy.org%2Freact-page-swapper%2Fdemo%2Fpages%2Fpage3.js ***!
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fpage2&absolutePagePath=%2FUsers%2Fsatazor%2FWork%2Fmoxy.org%2Freact-page-swapper%2Fdemo%2Fpages%2Fpage2.js ***!
   \*****************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    (window.__NEXT_P=window.__NEXT_P||[]).push(["/page3", function() {
-      var mod = __webpack_require__(/*! ./pages/page3.js */ "./pages/page3.js")
+    (window.__NEXT_P=window.__NEXT_P||[]).push(["/page2", function() {
+      var mod = __webpack_require__(/*! ./pages/page2.js */ "./pages/page2.js")
       if(true) {
-        module.hot.accept(/*! ./pages/page3.js */ "./pages/page3.js", function() {
-          if(!next.router.components["/page3"]) return
-          var updatedPage = __webpack_require__(/*! ./pages/page3.js */ "./pages/page3.js")
-          next.router.update("/page3", updatedPage)
+        module.hot.accept(/*! ./pages/page2.js */ "./pages/page2.js", function() {
+          if(!next.router.components["/page2"]) return
+          var updatedPage = __webpack_require__(/*! ./pages/page2.js */ "./pages/page2.js")
+          next.router.update("/page2", updatedPage)
         })
       }
       return mod
@@ -48884,9 +48952,9 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./pages/page3.js":
+/***/ "./pages/page2.js":
 /*!************************!*\
-  !*** ./pages/page3.js ***!
+  !*** ./pages/page2.js ***!
   \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -48895,49 +48963,124 @@ module.exports = g;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-/* harmony import */ var _page3_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./page3.module.css */ "./pages/page3.module.css");
-/* harmony import */ var _page3_module_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_page3_module_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _page2_module_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./page2.module.css */ "./pages/page2.module.css");
+/* harmony import */ var _page2_module_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_page2_module_css__WEBPACK_IMPORTED_MODULE_3__);
 var _this = undefined,
-    _jsxFileName = "/Users/satazor/Work/moxy.org/react-page-swapper/demo/pages/page3.js";
+    _jsxFileName = "/Users/satazor/Work/moxy.org/react-page-swapper/demo/pages/page2.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
-var Page3 = function Page3() {
+
+var Page2 = function Page2() {
   return __jsx("div", {
-    className: _page3_module_css__WEBPACK_IMPORTED_MODULE_2___default.a.page3,
-    __self: _this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 6,
-      columnNumber: 5
-    }
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
-    paragraph: true,
+    className: _page2_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.page2,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 7,
+      columnNumber: 5
+    }
+  }, __jsx("section", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_page2_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.section, _page2_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.section1),
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 8,
       columnNumber: 9
     }
-  }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc suscipit tincidunt risus, eget tempor libero. Vestibulum tincidunt tortor ac nulla finibus, nec mollis nisl tempor. Vivamus lacus diam, euismod ut tincidunt commodo, scelerisque vel lorem. Nam sit amet sodales dui. Proin fringilla tellus eu posuere auctor. Cras interdum tempus dolor, ut faucibus neque tristique nec. Sed est odio, iaculis ac elementum vitae, sodales at est. Aliquam sed consectetur ipsum. Nam consequat est non porta finibus. Aliquam arcu nunc, euismod ut consequat vitae, tristique ac mi. Ut accumsan felis id elit commodo fermentum."));
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
+    paragraph: true,
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9,
+      columnNumber: 13
+    }
+  }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc suscipit tincidunt risus, eget tempor libero. Vestibulum tincidunt tortor ac nulla finibus, nec mollis nisl tempor. Vivamus lacus diam, euismod ut tincidunt commodo, scelerisque vel lorem. Nam sit amet sodales dui. Proin fringilla tellus eu posuere auctor. Cras interdum tempus dolor, ut faucibus neque tristique nec. Sed est odio, iaculis ac elementum vitae, sodales at est. Aliquam sed consectetur ipsum. Nam consequat est non porta finibus. Aliquam arcu nunc, euismod ut consequat vitae, tristique ac mi. Ut accumsan felis id elit commodo fermentum.")), __jsx("section", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_page2_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.section, _page2_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.section2),
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 11,
+      columnNumber: 9
+    }
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
+    paragraph: true,
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12,
+      columnNumber: 13
+    }
+  }, "Morbi a maximus quam. In nec porta tortor, sit amet tincidunt ex. Vivamus vel justo vel massa sollicitudin maximus. Phasellus tempor congue pretium. Sed facilisis, urna sed tristique suscipit, justo justo rutrum tortor, mattis rhoncus dui sem sit amet dui. Aliquam eu luctus nunc. Donec aliquet consectetur orci, sed viverra lorem tincidunt quis. Nullam lobortis imperdiet velit nec dapibus. Nam eu elit et est eleifend venenatis vitae a purus. Cras quis mi interdum, pretium ipsum nec, convallis nunc. Fusce viverra, ligula at sollicitudin imperdiet, nibh purus laoreet sapien, id suscipit mi purus eu mauris. Pellentesque pellentesque urna sapien, id tincidunt odio rutrum ac. Pellentesque facilisis placerat purus, non eleifend sapien ultricies ut.")), __jsx("section", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_page2_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.section, _page2_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.section3),
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14,
+      columnNumber: 9
+    }
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
+    paragraph: true,
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 15,
+      columnNumber: 13
+    }
+  }, "Quisque quis ex justo. Quisque egestas lectus quis enim aliquet eleifend. Curabitur aliquet ornare commodo. Sed tincidunt odio neque. Cras porta tempus nisl ut vehicula. Maecenas vel blandit felis. Pellentesque quis dui accumsan, scelerisque quam vel, scelerisque elit. Sed sodales leo nunc, ac elementum nulla consectetur at. In id dui at lorem sagittis aliquet. Nullam eu lectus ac diam ullamcorper pulvinar. Mauris lacinia ut augue vitae efficitur. Mauris magna mauris, varius at nulla at, pretium molestie sem. Etiam semper dolor ipsum, ac suscipit leo vulputate et. Aliquam enim dolor, pulvinar nec fermentum eget, pulvinar eget erat.")), __jsx("section", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_page2_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.section, _page2_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.section4),
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17,
+      columnNumber: 9
+    }
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
+    paragraph: true,
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18,
+      columnNumber: 13
+    }
+  }, "Aenean enim lacus, ullamcorper eu commodo in, consectetur in sem. Proin semper urna diam, ut egestas ipsum convallis dictum. Maecenas quis massa vel tellus posuere porttitor luctus vitae risus. Proin turpis mauris, facilisis eu commodo ac, molestie eu odio. Nam at consectetur nibh. Etiam vitae facilisis ante, a fringilla orci. Duis leo tortor, dictum vel tincidunt vel, pharetra sit amet odio. Quisque tempus congue tincidunt. Donec in turpis consectetur, pellentesque odio ut, viverra ante. Pellentesque id metus elementum, maximus nibh a, egestas nisl. Pellentesque ligula mi, viverra id felis eget, dictum feugiat nulla.")), __jsx("section", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_page2_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.section, _page2_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.section5),
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20,
+      columnNumber: 9
+    }
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
+    paragraph: true,
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21,
+      columnNumber: 13
+    }
+  }, "Donec mollis quam id justo cursus, eget ultrices mauris eleifend. Vivamus euismod eros magna, eu rutrum diam placerat quis. Fusce feugiat, orci quis sodales fringilla, nisl nibh volutpat metus, sed volutpat leo nisl sed est. Fusce eleifend ante in commodo sodales. Nullam suscipit consectetur leo, sit amet hendrerit nulla lobortis a. Phasellus pretium ante eget sem porta, consectetur bibendum turpis congue. Vestibulum enim nisi, convallis ut magna at, feugiat dignissim sem. Duis congue ipsum non risus maximus sagittis. Maecenas neque est, vestibulum ac tincidunt et, dignissim nec mauris. Aenean fringilla massa sit amet sapien viverra, ac facilisis dui elementum. Suspendisse vitae scelerisque mauris. Mauris sagittis eros ut tincidunt feugiat. Ut a diam dolor.")));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Page3);
+/* harmony default export */ __webpack_exports__["default"] = (Page2);
 
 /***/ }),
 
-/***/ "./pages/page3.module.css":
+/***/ "./pages/page2.module.css":
 /*!********************************!*\
-  !*** ./pages/page3.module.css ***!
+  !*** ./pages/page2.module.css ***!
   \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var content = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-oneOf-2-1!../node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./page3.module.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./pages/page3.module.css");
+var content = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-oneOf-2-1!../node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./page2.module.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./pages/page2.module.css");
 
 if (typeof content === 'string') {
   content = [[module.i, content, '']];
@@ -48971,9 +49114,9 @@ if (content.locals) {
 if (true) {
   if (!content.locals) {
     module.hot.accept(
-      /*! !../node_modules/css-loader/dist/cjs.js??ref--5-oneOf-2-1!../node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./page3.module.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./pages/page3.module.css",
+      /*! !../node_modules/css-loader/dist/cjs.js??ref--5-oneOf-2-1!../node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./page2.module.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./pages/page2.module.css",
       function () {
-        var newContent = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-oneOf-2-1!../node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./page3.module.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./pages/page3.module.css");
+        var newContent = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-oneOf-2-1!../node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./page2.module.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./pages/page2.module.css");
 
         if (typeof newContent === 'string') {
           newContent = [[module.i, newContent, '']];
@@ -48991,14 +49134,14 @@ if (true) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 1:
 /*!*********************************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fpage3&absolutePagePath=%2FUsers%2Fsatazor%2FWork%2Fmoxy.org%2Freact-page-swapper%2Fdemo%2Fpages%2Fpage3.js ***!
+  !*** multi next-client-pages-loader?page=%2Fpage2&absolutePagePath=%2FUsers%2Fsatazor%2FWork%2Fmoxy.org%2Freact-page-swapper%2Fdemo%2Fpages%2Fpage2.js ***!
   \*********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fpage3&absolutePagePath=%2FUsers%2Fsatazor%2FWork%2Fmoxy.org%2Freact-page-swapper%2Fdemo%2Fpages%2Fpage3.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fpage3&absolutePagePath=%2FUsers%2Fsatazor%2FWork%2Fmoxy.org%2Freact-page-swapper%2Fdemo%2Fpages%2Fpage3.js!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fpage2&absolutePagePath=%2FUsers%2Fsatazor%2FWork%2Fmoxy.org%2Freact-page-swapper%2Fdemo%2Fpages%2Fpage2.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fpage2&absolutePagePath=%2FUsers%2Fsatazor%2FWork%2Fmoxy.org%2Freact-page-swapper%2Fdemo%2Fpages%2Fpage2.js!./");
 
 
 /***/ }),
@@ -49014,5 +49157,5 @@ module.exports = dll_2adc2403d89adc16ead0;
 
 /***/ })
 
-},[[3,"static/runtime/webpack.js"]]]);
-//# sourceMappingURL=page3.js.map
+},[[1,"static/runtime/webpack.js"]]]);
+//# sourceMappingURL=page2.js.map
