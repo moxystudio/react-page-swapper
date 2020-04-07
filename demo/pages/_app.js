@@ -1,14 +1,14 @@
+import './_global.css';
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import PageSwapper from '@moxy/react-page-swapper';
 import ThemeProvider from '../components/theme-provider';
-import { PageTransition, AnimationPicker } from '../components';
-import './_app.css';
+import { PageTransition } from '../components';
+import styles from './_app.module.css';
 
 const App = ({ Component, pageProps }) => {
-    const router = useRouter();
-
     useEffect(() => {
         const jssStyles = document.querySelector('#jss-server-side');
 
@@ -17,16 +17,28 @@ const App = ({ Component, pageProps }) => {
         }
     }, []);
 
-    return (
-        <ThemeProvider>
-            <PageSwapper
-                node={ <Component { ...pageProps } /> }
-                animation={ router.query.animation ?? 'none' }>
-                { (props) => <PageTransition { ...props } /> }
-            </PageSwapper>
+    useEffect(() => {
+        history.scrollRestoration = 'manual';
+    });
 
-            <AnimationPicker nextHref={ router.pathname === '/' ? '/dummy' : '/' } />
-        </ThemeProvider>
+    const router = useRouter();
+
+    return (
+        <>
+            <Head>
+                <title>@moxy/react-page-swapper demo</title>
+                <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+            </Head>
+
+            <ThemeProvider>
+                <PageSwapper
+                    className={ styles.pageSwapper }
+                    node={ <Component { ...pageProps } /> }
+                    animation={ router.query.animation ?? 'none' }>
+                    { (props) => <PageTransition { ...props } /> }
+                </PageSwapper>
+            </ThemeProvider>
+        </>
     );
 };
 

@@ -3,8 +3,7 @@ html {
 }
 
 body {
+    overflow-y: scroll;
     margin: 0;
-    overflow-y: visible;
-    overflow-x: hidden;
     background-color: #244444;
 }

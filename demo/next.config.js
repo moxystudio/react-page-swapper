@@ -6,7 +6,8 @@ module.exports = {
     exportPathMap() {
         return {
             '/': { page: '/' },
-            '/dummy': { page: '/dummy' },
+            '/page2': { page: '/page2' },
+            '/page3': { page: '/page3' },
         };
     },
     assetPrefix: `${basePath}/`,
