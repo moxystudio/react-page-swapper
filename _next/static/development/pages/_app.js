@@ -9,19 +9,25 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-/* harmony import */ var _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AnimationPicker.module.css */ "./components/animation-picker/AnimationPicker.module.css");
-/* harmony import */ var _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AnimationPicker.module.css */ "./components/animation-picker/AnimationPicker.module.css");
+/* harmony import */ var _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_6__);
+
+
 var _this = undefined,
     _jsxFileName = "/Users/satazor/Work/moxy.org/react-page-swapper/demo/components/animation-picker/AnimationPicker.js";
 
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
 
 
 
@@ -29,121 +35,168 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 var AnimationPicker = function AnimationPicker(_ref) {
-  var nextHref = _ref.nextHref;
-  return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Paper"], {
-    className: _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.animationPicker,
+  var nextHref = _ref.nextHref,
+      followScroll = _ref.followScroll;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      animate = _useState[0],
+      setAnimate = _useState[1];
+
+  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      scrollTop = _useState2[0],
+      setScrollTop = _useState2[1];
+
+  var scrollTimeoutIdRef = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    if (!followScroll) {
+      return;
+    }
+
+    var handleScroll = function handleScroll() {
+      clearTimeout(scrollTimeoutIdRef.current);
+      scrollTimeoutIdRef.current = setTimeout(function () {
+        setScrollTop(document.scrollingElement.scrollTop);
+      }, 200);
+    };
+
+    setScrollTop(document.scrollingElement.scrollTop);
+    window.addEventListener('scroll', handleScroll, {
+      passive: true
+    });
+    return function () {
+      clearTimeout(scrollTimeoutIdRef.current);
+      window.removeEventListener('scroll', handleScroll, {
+        passive: true
+      });
+    };
+  }, [followScroll]);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    var setAnimateTimeoutId = setTimeout(function () {
+      return setAnimate(true);
+    }, 50);
+    return function () {
+      clearTimeout(setAnimateTimeoutId);
+    };
+  }, []);
+  var style = {
+    transform: "translate(-50%, calc(-50% + ".concat(scrollTop, "px))")
+  };
+  return __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Paper"], {
     elevation: 3,
+    className: classnames__WEBPACK_IMPORTED_MODULE_4___default()(_AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_6___default.a.animationPicker, Object(_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_6___default.a.animate, animate)),
+    style: style,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8,
-      columnNumber: 5
+      lineNumber: 45,
+      columnNumber: 9
     }
-  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
     href: "".concat(nextHref, "?animation=slideLeft"),
     passHref: true,
     scroll: false,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 9,
-      columnNumber: 9
+      lineNumber: 49,
+      columnNumber: 13
     }
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
     variant: "contained",
     disableRipple: true,
-    className: _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.button,
+    className: _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_6___default.a.button,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10,
-      columnNumber: 13
+      lineNumber: 50,
+      columnNumber: 17
     }
-  }, "Slide left")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, "Slide left")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
     href: "".concat(nextHref, "?animation=slideRight"),
     passHref: true,
     scroll: false,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12,
-      columnNumber: 9
+      lineNumber: 52,
+      columnNumber: 13
     }
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
     variant: "contained",
     disableRipple: true,
-    className: _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.button,
+    className: _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_6___default.a.button,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13,
-      columnNumber: 13
+      lineNumber: 53,
+      columnNumber: 17
     }
-  }, "Slide right")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, "Slide right")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
     href: "".concat(nextHref, "?animation=glideLeft"),
     passHref: true,
     scroll: false,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15,
-      columnNumber: 9
+      lineNumber: 55,
+      columnNumber: 13
     }
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
     variant: "contained",
     disableRipple: true,
-    className: _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.button,
+    className: _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_6___default.a.button,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16,
-      columnNumber: 13
+      lineNumber: 56,
+      columnNumber: 17
     }
-  }, "Glide left")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, "Glide left")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
     href: "".concat(nextHref, "?animation=glideRight"),
     passHref: true,
     scroll: false,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18,
-      columnNumber: 9
+      lineNumber: 58,
+      columnNumber: 13
     }
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
     variant: "contained",
     disableRipple: true,
-    className: _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.button,
+    className: _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_6___default.a.button,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19,
-      columnNumber: 13
+      lineNumber: 59,
+      columnNumber: 17
     }
-  }, "Glide right")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, "Glide right")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
     href: "".concat(nextHref, "?animation=fade"),
     passHref: true,
     scroll: false,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21,
-      columnNumber: 9
+      lineNumber: 61,
+      columnNumber: 13
     }
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
     variant: "contained",
     disableRipple: true,
-    className: _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.button,
+    className: _AnimationPicker_module_css__WEBPACK_IMPORTED_MODULE_6___default.a.button,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22,
-      columnNumber: 13
+      lineNumber: 62,
+      columnNumber: 17
     }
   }, "Fade")));
 };
 
 AnimationPicker.propTypes = {
-  nextHref: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired
+  nextHref: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
+  followScroll: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool
 };
 /* harmony default export */ __webpack_exports__["default"] = (AnimationPicker);
 
@@ -312,11 +365,13 @@ var getZIndex = function getZIndex(animation, inProp) {
 var PageTransition = function PageTransition(_ref) {
   var node = _ref.node,
       animation = _ref.animation,
+      transitioning = _ref.transitioning,
       style = _ref.style,
       inProp = _ref["in"],
       onEntered = _ref.onEntered,
       onExited = _ref.onExited;
   return __jsx("div", {
+    className: _PageTransition_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.container,
     style: _objectSpread({}, style, {
       zIndex: getZIndex(animation, inProp)
     }),
@@ -347,21 +402,21 @@ var PageTransition = function PageTransition(_ref) {
     }
   }, __jsx("div", {
     className: _PageTransition_module_css__WEBPACK_IMPORTED_MODULE_4___default.a[animation],
-    style: _objectSpread({}, style, {
-      zIndex: getZIndex(animation, inProp)
-    }),
     __self: _this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 43,
       columnNumber: 13
     }
-  }, node)));
+  }, Object(react__WEBPACK_IMPORTED_MODULE_1__["cloneElement"])(node, {
+    transitioning: transitioning
+  }))));
 };
 
 PageTransition.propTypes = {
   node: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.element.isRequired,
   animation: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOf(['none', 'glideLeft', 'glideRight', 'slideLeft', 'slideRight', 'fade']),
+  transitioning: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
   style: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object,
   "in": prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
   onEntered: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
@@ -40304,22 +40359,18 @@ var refType = prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.oneOfType([prop_
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PageSwapper; });
-/* harmony import */ var lodash_omit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/omit */ "./node_modules/lodash/omit.js");
-/* harmony import */ var lodash_omit__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_omit__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-transition-group */ "./node_modules/react-transition-group/esm/index.js");
-/* harmony import */ var once__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! once */ "./node_modules/once/once.js");
-/* harmony import */ var once__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(once__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _SwapTransition__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SwapTransition */ "./node_modules/@moxy/react-page-swapper/es/SwapTransition.js");
-/* harmony import */ var _node_key__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./node-key */ "./node_modules/@moxy/react-page-swapper/es/node-key.js");
-/* harmony import */ var _lock_size__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./lock-size */ "./node_modules/@moxy/react-page-swapper/es/lock-size.js");
-
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-transition-group */ "./node_modules/react-transition-group/esm/index.js");
+/* harmony import */ var once__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! once */ "./node_modules/once/once.js");
+/* harmony import */ var once__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(once__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _SwapTransition__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SwapTransition */ "./node_modules/@moxy/react-page-swapper/es/SwapTransition.js");
+/* harmony import */ var _node_key__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node-key */ "./node_modules/@moxy/react-page-swapper/es/node-key.js");
+/* harmony import */ var _lock_size__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lock-size */ "./node_modules/@moxy/react-page-swapper/es/lock-size.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -40330,7 +40381,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-class PageSwapper extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
+class PageSwapper extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
 
@@ -40338,7 +40389,7 @@ class PageSwapper extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
 
     _defineProperty(this, "raf", undefined);
 
-    _defineProperty(this, "containerRef", Object(react__WEBPACK_IMPORTED_MODULE_1__["createRef"])());
+    _defineProperty(this, "containerRef", Object(react__WEBPACK_IMPORTED_MODULE_0__["createRef"])());
 
     _defineProperty(this, "swapTransition", void 0);
 
@@ -40371,12 +40422,10 @@ class PageSwapper extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       handleEntered,
       handleExited
     } = this.state;
-
-    const rest = lodash_omit__WEBPACK_IMPORTED_MODULE_0___default()(this.props, ['node', 'nodeKey', 'animation', 'updateScroll', 'children', 'onSwapBegin', 'onSwapEnd']);
-
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_4__["TransitionGroup"], Object.assign({}, rest, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_3__["TransitionGroup"], {
+      component: null,
       ref: this.containerRef
-    }), nodeKey && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_SwapTransition__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    }, nodeKey && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SwapTransition__WEBPACK_IMPORTED_MODULE_5__["default"], {
       key: nodeKey,
       node: node,
       nodeKey: nodeKey,
@@ -40395,7 +40444,7 @@ class PageSwapper extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
 
   isOutOfSync() {
     const currentNodeKey = this.state.nodeKey;
-    const nodeKey = this.props.nodeKey || Object(_node_key__WEBPACK_IMPORTED_MODULE_7__["getRandomNodeKey"])(this.props.node);
+    const nodeKey = this.props.nodeKey || Object(_node_key__WEBPACK_IMPORTED_MODULE_6__["getRandomNodeKey"])(this.props.node);
     return nodeKey !== currentNodeKey;
   }
 
@@ -40405,7 +40454,7 @@ class PageSwapper extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
     (_this$props$onSwapBeg = (_this$props = this.props).onSwapBegin) === null || _this$props$onSwapBeg === void 0 ? void 0 : _this$props$onSwapBeg.call(_this$props);
     this.remainingSwapAcks = 2;
     const state = this.buildState();
-    const unlockSize = Object(_lock_size__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(react_dom__WEBPACK_IMPORTED_MODULE_2__["findDOMNode"])(this.containerRef.current));
+    const unlockSize = Object(_lock_size__WEBPACK_IMPORTED_MODULE_7__["default"])(Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["findDOMNode"])(this.containerRef.current));
     cancelAnimationFrame(this.raf);
     this.setState({
       animation: state.animation,
@@ -40413,10 +40462,12 @@ class PageSwapper extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
     }, () => {
       this.raf = requestAnimationFrame(() => {
         this.setState(state, () => {
-          var _this$props$updateScr, _this$props2;
+          requestAnimationFrame(() => {
+            var _this$props$updateScr, _this$props2;
 
-          (_this$props$updateScr = (_this$props2 = this.props).updateScroll) === null || _this$props$updateScr === void 0 ? void 0 : _this$props$updateScr.call(_this$props2);
-          unlockSize();
+            (_this$props$updateScr = (_this$props2 = this.props).updateScroll) === null || _this$props$updateScr === void 0 ? void 0 : _this$props$updateScr.call(_this$props2);
+            unlockSize();
+          });
         });
       });
     });
@@ -40442,7 +40493,7 @@ class PageSwapper extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
     const {
       nodeKey: currentNodeKey
     } = this.state;
-    const nodeKey = (_this$props$nodeKey = this.props.nodeKey) !== null && _this$props$nodeKey !== void 0 ? _this$props$nodeKey : Object(_node_key__WEBPACK_IMPORTED_MODULE_7__["getRandomNodeKey"])(node);
+    const nodeKey = (_this$props$nodeKey = this.props.nodeKey) !== null && _this$props$nodeKey !== void 0 ? _this$props$nodeKey : Object(_node_key__WEBPACK_IMPORTED_MODULE_6__["getRandomNodeKey"])(node);
     const animationStr = typeof animation === 'function' ? animation({
       prevNodeKey: currentNodeKey,
       nodeKey
@@ -40453,9 +40504,9 @@ class PageSwapper extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       prevNodeKey: currentNodeKey,
       animation: animationStr,
       style: this.buildEnterStyle(),
-      handleRef: once__WEBPACK_IMPORTED_MODULE_5___default()(ref => this.handleRef(ref)),
-      handleEntered: once__WEBPACK_IMPORTED_MODULE_5___default()(() => this.handleEntered(nodeKey)),
-      handleExited: once__WEBPACK_IMPORTED_MODULE_5___default()(() => this.handleExited(nodeKey))
+      handleRef: once__WEBPACK_IMPORTED_MODULE_4___default()(ref => this.handleRef(ref)),
+      handleEntered: once__WEBPACK_IMPORTED_MODULE_4___default()(() => this.handleEntered(nodeKey)),
+      handleExited: once__WEBPACK_IMPORTED_MODULE_4___default()(() => this.handleExited(nodeKey))
     };
   }
 
@@ -40466,7 +40517,7 @@ class PageSwapper extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
   }
 
   buildExitStyle() {
-    const element = Object(react_dom__WEBPACK_IMPORTED_MODULE_2__["findDOMNode"])(this.swapTransition);
+    const element = Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["findDOMNode"])(this.swapTransition);
 
     if (!element) {
       return {};
@@ -40526,13 +40577,13 @@ class PageSwapper extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
 }
 
 _defineProperty(PageSwapper, "propTypes", {
-  node: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.element.isRequired,
-  nodeKey: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
-  animation: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func]),
-  children: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
-  updateScroll: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
-  onSwapBegin: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
-  onSwapEnd: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func
+  node: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.element.isRequired,
+  nodeKey: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  animation: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func]),
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
+  updateScroll: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+  onSwapBegin: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+  onSwapEnd: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func
 });
 
 /***/ }),
@@ -40751,6 +40802,68 @@ const isPopState = () => popState;
 
 /***/ }),
 
+/***/ "./node_modules/classnames/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/classnames/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg) && arg.length) {
+				var inner = classNames.apply(null, arg);
+				if (inner) {
+					classes.push(inner);
+				}
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if ( true && module.exports) {
+		classNames.default = classNames;
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {}
+}());
+
+
+/***/ }),
+
 /***/ "./node_modules/clsx/dist/clsx.m.js":
 /*!******************************************!*\
   !*** ./node_modules/clsx/dist/clsx.m.js ***!
@@ -40810,10 +40923,11 @@ function toVal(mix) {
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
 // Module
-exports.push([module.i, ".AnimationPicker_animationPicker__3HoaT {\n    position: fixed;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    display: flex;\n    flex-direction: column;\n    padding: 16px;\n    background-color: rgba(0, 0, 0, 0.3)\n}\n.AnimationPicker_animationPicker__3HoaT .AnimationPicker_button__2SlpP {\n        width: 200px;\n        margin: 10px;\n        background-color: #fff;\n    }\n", "",{"version":3,"sources":["/Users/satazor/Work/moxy.org/react-page-swapper/demo/components/animation-picker/AnimationPicker.module.css"],"names":[],"mappings":"AAAA;IACI,eAAe;IACf,QAAQ;IACR,SAAS;IACT,gCAAgC;IAChC,aAAa;IACb,sBAAsB;IACtB,aAAa;IACb;AAOJ;AALI;QACI,YAAY;QACZ,YAAY;QACZ,sBAAsB;IAC1B","file":"AnimationPicker.module.css","sourcesContent":[".animationPicker {\n    position: fixed;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    display: flex;\n    flex-direction: column;\n    padding: 16px;\n    background-color: color(#000 alpha(0.3));\n\n    & .button {\n        width: 200px;\n        margin: 10px;\n        background-color: #fff;\n    }\n}\n"]}]);
+exports.push([module.i, ".AnimationPicker_animationPicker__3HoaT {\n    position: absolute;\n    top: 50vh;\n    left: 50vw;\n    transform: translate(-50%, -50%);\n    display: flex;\n    flex-direction: column;\n    padding: 16px;\n    background-color: rgba(0, 0, 0, 0.3)\n}\n.AnimationPicker_animationPicker__3HoaT.AnimationPicker_animate__2YqQ8 {\n        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);\n    }\n.AnimationPicker_animationPicker__3HoaT .AnimationPicker_button__2SlpP {\n        width: 200px;\n        margin: 10px;\n        background-color: #fff;\n    }\n", "",{"version":3,"sources":["/Users/satazor/Work/moxy.org/react-page-swapper/demo/components/animation-picker/AnimationPicker.module.css"],"names":[],"mappings":"AAAA;IACI,kBAAkB;IAClB,SAAS;IACT,UAAU;IACV,gCAAgC;IAChC,aAAa;IACb,sBAAsB;IACtB,aAAa;IACb;AAWJ;AATI;QACI,wDAAwD;IAC5D;AAEA;QACI,YAAY;QACZ,YAAY;QACZ,sBAAsB;IAC1B","file":"AnimationPicker.module.css","sourcesContent":[".animationPicker {\n    position: absolute;\n    top: 50vh;\n    left: 50vw;\n    transform: translate(-50%, -50%);\n    display: flex;\n    flex-direction: column;\n    padding: 16px;\n    background-color: color(#000 alpha(0.3));\n\n    &.animate {\n        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);\n    }\n\n    & .button {\n        width: 200px;\n        margin: 10px;\n        background-color: #fff;\n    }\n}\n"]}]);
 // Exports
 exports.locals = {
 	"animationPicker": "AnimationPicker_animationPicker__3HoaT",
+	"animate": "AnimationPicker_animate__2YqQ8",
 	"button": "AnimationPicker_button__2SlpP"
 };
 
@@ -40828,9 +40942,10 @@ exports.locals = {
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
 // Module
-exports.push([module.i, "/* ==========================================================================\n   Fade\n   ========================================================================== */\n\n.PageTransition_fade__2ObpC {\n    transition: opacity 0.6s\n}\n\n.PageTransition_fade__2ObpC.PageTransition_enter__8z6yq {\n        opacity: 0;\n    }\n\n.PageTransition_fade__2ObpC.PageTransition_enterActive__3BzXp,\n    .PageTransition_fade__2ObpC.PageTransition_enterDone__SEshm {\n        opacity: 1;\n    }\n\n/* ==========================================================================\n   Slide left\n   ========================================================================== */\n\n@supports (-webkit-touch-callout: none) {\n    .PageTransition_slideLeft__3LW9j {\n        position: relative;\n        transition: left 0.6s cubic-bezier(0.25, 1, 0.5, 1)\n    }\n\n        .PageTransition_slideLeft__3LW9j.PageTransition_enter__8z6yq {\n            left: 100vw;\n        }\n\n        .PageTransition_slideLeft__3LW9j.PageTransition_enterActive__3BzXp,\n        .PageTransition_slideLeft__3LW9j.PageTransition_enterDone__SEshm {\n            left: 0;\n        }\n}\n\n@supports not (-webkit-touch-callout: none) {\n    .PageTransition_slideLeft__3LW9j {\n        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);\n        transform-style: preserve-3d /* Necessary to performance on Firefox */\n    }\n\n        .PageTransition_slideLeft__3LW9j.PageTransition_enter__8z6yq {\n            transform: translateX(100vw);\n        }\n\n        .PageTransition_slideLeft__3LW9j.PageTransition_enterActive__3BzXp,\n        .PageTransition_slideLeft__3LW9j.PageTransition_enterDone__SEshm {\n            transform: translateX(0);\n        }\n}\n\n/* ==========================================================================\n   Slide right\n   ========================================================================== */\n\n@supports (-webkit-touch-callout: none) {\n    .PageTransition_slideRight__23WvB {\n        position: relative;\n        transition: left 0.6s cubic-bezier(0.25, 1, 0.5, 1)\n    }\n\n        .PageTransition_slideRight__23WvB.PageTransition_enter__8z6yq {\n            left: -100vw;\n        }\n\n        .PageTransition_slideRight__23WvB.PageTransition_enterActive__3BzXp,\n        .PageTransition_slideRight__23WvB.PageTransition_enterDone__SEshm {\n            left: 0;\n        }\n}\n\n@supports not (-webkit-touch-callout: none) {\n    .PageTransition_slideRight__23WvB {\n        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);\n        transform-style: preserve-3d /* Necessary to performance on Firefox */\n    }\n\n        .PageTransition_slideRight__23WvB.PageTransition_enter__8z6yq {\n            transform: translateX(-100vw);\n        }\n\n        .PageTransition_slideRight__23WvB.PageTransition_enterActive__3BzXp,\n        .PageTransition_slideRight__23WvB.PageTransition_enterDone__SEshm {\n            transform: translateX(0);\n        }\n}\n\n/* ==========================================================================\n   Glide left\n   ========================================================================== */\n\n@supports not (-webkit-touch-callout: none) {\n    .PageTransition_glideLeft__2G5ER {\n        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);\n        transform-style: preserve-3d /* Necessary to performance on Firefox */\n    }\n\n        .PageTransition_glideLeft__2G5ER.PageTransition_enter__8z6yq {\n            transform: translateX(100vw);\n        }\n\n        .PageTransition_glideLeft__2G5ER.PageTransition_enterActive__3BzXp,\n        .PageTransition_glideLeft__2G5ER.PageTransition_enterDone__SEshm,\n        .PageTransition_glideLeft__2G5ER.PageTransition_exit__269gm {\n            transform: translateX(0);\n        }\n\n        .PageTransition_glideLeft__2G5ER.PageTransition_exitActive__1nGYR,\n        .PageTransition_glideLeft__2G5ER.PageTransition_exitDone__GIlY9 {\n            transform: translateX(-25vw);\n        }\n}\n\n@supports (-webkit-touch-callout: none) {\n    .PageTransition_glideLeft__2G5ER {\n        position: relative;\n        transition: left 0.6s cubic-bezier(0.25, 1, 0.5, 1)\n    }\n\n        .PageTransition_glideLeft__2G5ER.PageTransition_enter__8z6yq {\n            left: 100vw;\n        }\n\n        .PageTransition_glideLeft__2G5ER.PageTransition_enterActive__3BzXp,\n        .PageTransition_glideLeft__2G5ER.PageTransition_enterDone__SEshm,\n        .PageTransition_glideLeft__2G5ER.PageTransition_exit__269gm {\n            left: 0;\n        }\n\n        .PageTransition_glideLeft__2G5ER.PageTransition_exitActive__1nGYR,\n        .PageTransition_glideLeft__2G5ER.PageTransition_exitDone__GIlY9 {\n            left: -25vw;\n        }\n}\n\n/* ==========================================================================\n   Glide right\n   ========================================================================== */\n\n@supports not (-webkit-touch-callout: none) {\n    .PageTransition_glideRight__aVErR {\n        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);\n        transform-style: preserve-3d /* Necessary to performance on Firefox */\n    }\n\n        .PageTransition_glideRight__aVErR.PageTransition_enter__8z6yq {\n            transform: translateX(-100vw);\n        }\n\n        .PageTransition_glideRight__aVErR.PageTransition_enterActive__3BzXp,\n        .PageTransition_glideRight__aVErR.PageTransition_enterDone__SEshm,\n        .PageTransition_glideRight__aVErR.PageTransition_exit__269gm {\n            transform: translateX(0);\n        }\n\n        .PageTransition_glideRight__aVErR.PageTransition_exitActive__1nGYR,\n        .PageTransition_glideRight__aVErR.PageTransition_exitDone__GIlY9 {\n            transform: translateX(25vw);\n        }\n}\n\n@supports (-webkit-touch-callout: none) {\n    .PageTransition_glideRight__aVErR {\n        position: relative;\n        transition: left 0.6s cubic-bezier(0.25, 1, 0.5, 1)\n    }\n\n        .PageTransition_glideRight__aVErR.PageTransition_enter__8z6yq {\n            left: -100vw;\n        }\n\n        .PageTransition_glideRight__aVErR.PageTransition_enterActive__3BzXp,\n        .PageTransition_glideRight__aVErR.PageTransition_enterDone__SEshm,\n        .PageTransition_glideRight__aVErR.PageTransition_exit__269gm {\n            left: 0;\n        }\n\n        .PageTransition_glideRight__aVErR.PageTransition_exitActive__1nGYR,\n        .PageTransition_glideRight__aVErR.PageTransition_exitDone__GIlY9 {\n            left: 25vw;\n        }\n}\n", "",{"version":3,"sources":["/Users/satazor/Work/moxy.org/react-page-swapper/demo/components/page-transition/PageTransition.module.css"],"names":[],"mappings":"AAAA;;+EAE+E;;AAE/E;IACI;AAUJ;;AARI;QACI,UAAU;IACd;;AAEA;;QAEI,UAAU;IACd;;AAGJ;;+EAE+E;;AAE/E;IACI;QACI,kBAAkB;QAClB;IAUJ;;QARI;YACI,WAAW;QACf;;QAEA;;YAEI,OAAO;QACX;AAER;;AAEA;IACI;QACI,wDAAwD;QACxD,2BAA4B,EAAE,wCAAwC;IAU1E;;QARI;YACI,4BAA4B;QAChC;;QAEA;;YAEI,wBAAwB;QAC5B;AAER;;AAEA;;+EAE+E;;AAE/E;IACI;QACI,kBAAkB;QAClB;IAUJ;;QARI;YACI,YAAY;QAChB;;QAEA;;YAEI,OAAO;QACX;AAER;;AAEA;IACI;QACI,wDAAwD;QACxD,2BAA4B,EAAE,wCAAwC;IAU1E;;QARI;YACI,6BAA6B;QACjC;;QAEA;;YAEI,wBAAwB;QAC5B;AAER;;AAEA;;+EAE+E;;AAE/E;IACI;QACI,wDAAwD;QACxD,2BAA4B,EAAE,wCAAwC;IAgB1E;;QAdI;YACI,4BAA4B;QAChC;;QAEA;;;YAGI,wBAAwB;QAC5B;;QAEA;;YAEI,4BAA4B;QAChC;AAER;;AAEA;IACI;QACI,kBAAkB;QAClB;IAgBJ;;QAdI;YACI,WAAW;QACf;;QAEA;;;YAGI,OAAO;QACX;;QAEA;;YAEI,WAAW;QACf;AAER;;AAEA;;+EAE+E;;AAE/E;IACI;QACI,wDAAwD;QACxD,2BAA4B,EAAE,wCAAwC;IAgB1E;;QAdI;YACI,6BAA6B;QACjC;;QAEA;;;YAGI,wBAAwB;QAC5B;;QAEA;;YAEI,2BAA2B;QAC/B;AAER;;AAEA;IACI;QACI,kBAAkB;QAClB;IAgBJ;;QAdI;YACI,YAAY;QAChB;;QAEA;;;YAGI,OAAO;QACX;;QAEA;;YAEI,UAAU;QACd;AAER","file":"PageTransition.module.css","sourcesContent":["/* ==========================================================================\n   Fade\n   ========================================================================== */\n\n.fade {\n    transition: opacity 0.6s;\n\n    &.enter {\n        opacity: 0;\n    }\n\n    &.enterActive,\n    &.enterDone {\n        opacity: 1;\n    }\n}\n\n/* ==========================================================================\n   Slide left\n   ========================================================================== */\n\n@supports (-webkit-touch-callout: none) {\n    .slideLeft {\n        position: relative;\n        transition: left 0.6s cubic-bezier(0.25, 1, 0.5, 1);\n\n        &.enter {\n            left: 100vw;\n        }\n\n        &.enterActive,\n        &.enterDone {\n            left: 0;\n        }\n    }\n}\n\n@supports not (-webkit-touch-callout: none) {\n    .slideLeft {\n        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);\n        transform-style: preserve-3d; /* Necessary to performance on Firefox */\n\n        &.enter {\n            transform: translateX(100vw);\n        }\n\n        &.enterActive,\n        &.enterDone {\n            transform: translateX(0);\n        }\n    }\n}\n\n/* ==========================================================================\n   Slide right\n   ========================================================================== */\n\n@supports (-webkit-touch-callout: none) {\n    .slideRight {\n        position: relative;\n        transition: left 0.6s cubic-bezier(0.25, 1, 0.5, 1);\n\n        &.enter {\n            left: -100vw;\n        }\n\n        &.enterActive,\n        &.enterDone {\n            left: 0;\n        }\n    }\n}\n\n@supports not (-webkit-touch-callout: none) {\n    .slideRight {\n        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);\n        transform-style: preserve-3d; /* Necessary to performance on Firefox */\n\n        &.enter {\n            transform: translateX(-100vw);\n        }\n\n        &.enterActive,\n        &.enterDone {\n            transform: translateX(0);\n        }\n    }\n}\n\n/* ==========================================================================\n   Glide left\n   ========================================================================== */\n\n@supports not (-webkit-touch-callout: none) {\n    .glideLeft {\n        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);\n        transform-style: preserve-3d; /* Necessary to performance on Firefox */\n\n        &.enter {\n            transform: translateX(100vw);\n        }\n\n        &.enterActive,\n        &.enterDone,\n        &.exit {\n            transform: translateX(0);\n        }\n\n        &.exitActive,\n        &.exitDone {\n            transform: translateX(-25vw);\n        }\n    }\n}\n\n@supports (-webkit-touch-callout: none) {\n    .glideLeft {\n        position: relative;\n        transition: left 0.6s cubic-bezier(0.25, 1, 0.5, 1);\n\n        &.enter {\n            left: 100vw;\n        }\n\n        &.enterActive,\n        &.enterDone,\n        &.exit {\n            left: 0;\n        }\n\n        &.exitActive,\n        &.exitDone {\n            left: -25vw;\n        }\n    }\n}\n\n/* ==========================================================================\n   Glide right\n   ========================================================================== */\n\n@supports not (-webkit-touch-callout: none) {\n    .glideRight {\n        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);\n        transform-style: preserve-3d; /* Necessary to performance on Firefox */\n\n        &.enter {\n            transform: translateX(-100vw);\n        }\n\n        &.enterActive,\n        &.enterDone,\n        &.exit {\n            transform: translateX(0);\n        }\n\n        &.exitActive,\n        &.exitDone {\n            transform: translateX(25vw);\n        }\n    }\n}\n\n@supports (-webkit-touch-callout: none) {\n    .glideRight {\n        position: relative;\n        transition: left 0.6s cubic-bezier(0.25, 1, 0.5, 1);\n\n        &.enter {\n            left: -100vw;\n        }\n\n        &.enterActive,\n        &.enterDone,\n        &.exit {\n            left: 0;\n        }\n\n        &.exitActive,\n        &.exitDone {\n            left: 25vw;\n        }\n    }\n}\n"]}]);
+exports.push([module.i, ".PageTransition_container__1X9Cc {\n    overflow-x: hidden;\n}\n\n/* ==========================================================================\n   Fade\n   ========================================================================== */\n\n.PageTransition_fade__2ObpC {\n    transition: opacity 0.6s\n}\n\n.PageTransition_fade__2ObpC.PageTransition_enter__8z6yq {\n        opacity: 0;\n    }\n\n.PageTransition_fade__2ObpC.PageTransition_enterActive__3BzXp,\n    .PageTransition_fade__2ObpC.PageTransition_enterDone__SEshm {\n        opacity: 1;\n    }\n\n/* ==========================================================================\n   Slide left\n   ========================================================================== */\n\n@supports not (-webkit-touch-callout: none) {\n    .PageTransition_slideLeft__3LW9j {\n        transition: transform 0.6s ease;\n        transform-style: preserve-3d /* Necessary to performance on Firefox */\n    }\n\n        .PageTransition_slideLeft__3LW9j.PageTransition_enter__8z6yq {\n            transform: translateX(100vw);\n        }\n\n        .PageTransition_slideLeft__3LW9j.PageTransition_enterActive__3BzXp,\n        .PageTransition_slideLeft__3LW9j.PageTransition_enterDone__SEshm {\n            transform: translateX(0);\n        }\n}\n\n@supports (-webkit-touch-callout: none) {\n    .PageTransition_slideLeft__3LW9j {\n        position: relative;\n        transition: left 0.6s ease\n    }\n\n        .PageTransition_slideLeft__3LW9j.PageTransition_enter__8z6yq {\n            left: 100vw;\n        }\n\n        .PageTransition_slideLeft__3LW9j.PageTransition_enterActive__3BzXp,\n        .PageTransition_slideLeft__3LW9j.PageTransition_enterDone__SEshm {\n            left: 0;\n        }\n}\n\n/* ==========================================================================\n   Slide right\n   ========================================================================== */\n\n@supports not (-webkit-touch-callout: none) {\n    .PageTransition_slideRight__23WvB {\n        transition: transform 0.6s ease;\n        transform-style: preserve-3d /* Necessary to performance on Firefox */\n    }\n\n        .PageTransition_slideRight__23WvB.PageTransition_enter__8z6yq {\n            transform: translateX(-100vw);\n        }\n\n        .PageTransition_slideRight__23WvB.PageTransition_enterActive__3BzXp,\n        .PageTransition_slideRight__23WvB.PageTransition_enterDone__SEshm {\n            transform: translateX(0);\n        }\n}\n\n@supports (-webkit-touch-callout: none) {\n    .PageTransition_slideRight__23WvB {\n        position: relative;\n        transition: left 0.6s ease\n    }\n\n        .PageTransition_slideRight__23WvB.PageTransition_enter__8z6yq {\n            left: -100vw;\n        }\n\n        .PageTransition_slideRight__23WvB.PageTransition_enterActive__3BzXp,\n        .PageTransition_slideRight__23WvB.PageTransition_enterDone__SEshm {\n            left: 0;\n        }\n}\n\n/* ==========================================================================\n   Glide left\n   ========================================================================== */\n\n@supports not (-webkit-touch-callout: none) {\n    .PageTransition_glideLeft__2G5ER {\n        transition: transform 0.6s ease;\n        transform-style: preserve-3d /* Necessary to performance on Firefox */\n    }\n\n        .PageTransition_glideLeft__2G5ER.PageTransition_enter__8z6yq {\n            transform: translateX(100vw);\n        }\n\n        .PageTransition_glideLeft__2G5ER.PageTransition_enterActive__3BzXp,\n        .PageTransition_glideLeft__2G5ER.PageTransition_enterDone__SEshm,\n        .PageTransition_glideLeft__2G5ER.PageTransition_exit__269gm {\n            transform: translateX(0);\n        }\n\n        .PageTransition_glideLeft__2G5ER.PageTransition_exitActive__1nGYR,\n        .PageTransition_glideLeft__2G5ER.PageTransition_exitDone__GIlY9 {\n            transform: translateX(-25vw);\n        }\n}\n\n@supports (-webkit-touch-callout: none) {\n    .PageTransition_glideLeft__2G5ER {\n        position: relative;\n        transition: left 0.6s ease\n    }\n\n        .PageTransition_glideLeft__2G5ER.PageTransition_enter__8z6yq {\n            left: 100vw;\n        }\n\n        .PageTransition_glideLeft__2G5ER.PageTransition_enterActive__3BzXp,\n        .PageTransition_glideLeft__2G5ER.PageTransition_enterDone__SEshm,\n        .PageTransition_glideLeft__2G5ER.PageTransition_exit__269gm {\n            left: 0;\n        }\n\n        .PageTransition_glideLeft__2G5ER.PageTransition_exitActive__1nGYR,\n        .PageTransition_glideLeft__2G5ER.PageTransition_exitDone__GIlY9 {\n            left: -25vw;\n        }\n}\n\n/* ==========================================================================\n   Glide right\n   ========================================================================== */\n\n@supports not (-webkit-touch-callout: none) {\n    .PageTransition_glideRight__aVErR {\n        transition: transform 0.6s ease;\n        transform-style: preserve-3d /* Necessary to performance on Firefox */\n    }\n\n        .PageTransition_glideRight__aVErR.PageTransition_enter__8z6yq {\n            transform: translateX(-100vw);\n        }\n\n        .PageTransition_glideRight__aVErR.PageTransition_enterActive__3BzXp,\n        .PageTransition_glideRight__aVErR.PageTransition_enterDone__SEshm,\n        .PageTransition_glideRight__aVErR.PageTransition_exit__269gm {\n            transform: translateX(0);\n        }\n\n        .PageTransition_glideRight__aVErR.PageTransition_exitActive__1nGYR,\n        .PageTransition_glideRight__aVErR.PageTransition_exitDone__GIlY9 {\n            transform: translateX(25vw);\n        }\n}\n\n@supports (-webkit-touch-callout: none) {\n    .PageTransition_glideRight__aVErR {\n        position: relative;\n        transition: left 0.6s ease\n    }\n\n        .PageTransition_glideRight__aVErR.PageTransition_enter__8z6yq {\n            left: -100vw;\n        }\n\n        .PageTransition_glideRight__aVErR.PageTransition_enterActive__3BzXp,\n        .PageTransition_glideRight__aVErR.PageTransition_enterDone__SEshm,\n        .PageTransition_glideRight__aVErR.PageTransition_exit__269gm {\n            left: 0;\n        }\n\n        .PageTransition_glideRight__aVErR.PageTransition_exitActive__1nGYR,\n        .PageTransition_glideRight__aVErR.PageTransition_exitDone__GIlY9 {\n            left: 25vw;\n        }\n}\n", "",{"version":3,"sources":["/Users/satazor/Work/moxy.org/react-page-swapper/demo/components/page-transition/PageTransition.module.css"],"names":[],"mappings":"AAAA;IACI,kBAAkB;AACtB;;AAEA;;+EAE+E;;AAE/E;IACI;AAUJ;;AARI;QACI,UAAU;IACd;;AAEA;;QAEI,UAAU;IACd;;AAGJ;;+EAE+E;;AAE/E;IACI;QACI,+BAA+B;QAC/B,2BAA4B,EAAE,wCAAwC;IAU1E;;QARI;YACI,4BAA4B;QAChC;;QAEA;;YAEI,wBAAwB;QAC5B;AAER;;AAEA;IACI;QACI,kBAAkB;QAClB;IAUJ;;QARI;YACI,WAAW;QACf;;QAEA;;YAEI,OAAO;QACX;AAER;;AAEA;;+EAE+E;;AAE/E;IACI;QACI,+BAA+B;QAC/B,2BAA4B,EAAE,wCAAwC;IAU1E;;QARI;YACI,6BAA6B;QACjC;;QAEA;;YAEI,wBAAwB;QAC5B;AAER;;AAEA;IACI;QACI,kBAAkB;QAClB;IAUJ;;QARI;YACI,YAAY;QAChB;;QAEA;;YAEI,OAAO;QACX;AAER;;AAEA;;+EAE+E;;AAE/E;IACI;QACI,+BAA+B;QAC/B,2BAA4B,EAAE,wCAAwC;IAgB1E;;QAdI;YACI,4BAA4B;QAChC;;QAEA;;;YAGI,wBAAwB;QAC5B;;QAEA;;YAEI,4BAA4B;QAChC;AAER;;AAEA;IACI;QACI,kBAAkB;QAClB;IAgBJ;;QAdI;YACI,WAAW;QACf;;QAEA;;;YAGI,OAAO;QACX;;QAEA;;YAEI,WAAW;QACf;AAER;;AAEA;;+EAE+E;;AAE/E;IACI;QACI,+BAA+B;QAC/B,2BAA4B,EAAE,wCAAwC;IAgB1E;;QAdI;YACI,6BAA6B;QACjC;;QAEA;;;YAGI,wBAAwB;QAC5B;;QAEA;;YAEI,2BAA2B;QAC/B;AAER;;AAEA;IACI;QACI,kBAAkB;QAClB;IAgBJ;;QAdI;YACI,YAAY;QAChB;;QAEA;;;YAGI,OAAO;QACX;;QAEA;;YAEI,UAAU;QACd;AAER","file":"PageTransition.module.css","sourcesContent":[".container {\n    overflow-x: hidden;\n}\n\n/* ==========================================================================\n   Fade\n   ========================================================================== */\n\n.fade {\n    transition: opacity 0.6s;\n\n    &.enter {\n        opacity: 0;\n    }\n\n    &.enterActive,\n    &.enterDone {\n        opacity: 1;\n    }\n}\n\n/* ==========================================================================\n   Slide left\n   ========================================================================== */\n\n@supports not (-webkit-touch-callout: none) {\n    .slideLeft {\n        transition: transform 0.6s ease;\n        transform-style: preserve-3d; /* Necessary to performance on Firefox */\n\n        &.enter {\n            transform: translateX(100vw);\n        }\n\n        &.enterActive,\n        &.enterDone {\n            transform: translateX(0);\n        }\n    }\n}\n\n@supports (-webkit-touch-callout: none) {\n    .slideLeft {\n        position: relative;\n        transition: left 0.6s ease;\n\n        &.enter {\n            left: 100vw;\n        }\n\n        &.enterActive,\n        &.enterDone {\n            left: 0;\n        }\n    }\n}\n\n/* ==========================================================================\n   Slide right\n   ========================================================================== */\n\n@supports not (-webkit-touch-callout: none) {\n    .slideRight {\n        transition: transform 0.6s ease;\n        transform-style: preserve-3d; /* Necessary to performance on Firefox */\n\n        &.enter {\n            transform: translateX(-100vw);\n        }\n\n        &.enterActive,\n        &.enterDone {\n            transform: translateX(0);\n        }\n    }\n}\n\n@supports (-webkit-touch-callout: none) {\n    .slideRight {\n        position: relative;\n        transition: left 0.6s ease;\n\n        &.enter {\n            left: -100vw;\n        }\n\n        &.enterActive,\n        &.enterDone {\n            left: 0;\n        }\n    }\n}\n\n/* ==========================================================================\n   Glide left\n   ========================================================================== */\n\n@supports not (-webkit-touch-callout: none) {\n    .glideLeft {\n        transition: transform 0.6s ease;\n        transform-style: preserve-3d; /* Necessary to performance on Firefox */\n\n        &.enter {\n            transform: translateX(100vw);\n        }\n\n        &.enterActive,\n        &.enterDone,\n        &.exit {\n            transform: translateX(0);\n        }\n\n        &.exitActive,\n        &.exitDone {\n            transform: translateX(-25vw);\n        }\n    }\n}\n\n@supports (-webkit-touch-callout: none) {\n    .glideLeft {\n        position: relative;\n        transition: left 0.6s ease;\n\n        &.enter {\n            left: 100vw;\n        }\n\n        &.enterActive,\n        &.enterDone,\n        &.exit {\n            left: 0;\n        }\n\n        &.exitActive,\n        &.exitDone {\n            left: -25vw;\n        }\n    }\n}\n\n/* ==========================================================================\n   Glide right\n   ========================================================================== */\n\n@supports not (-webkit-touch-callout: none) {\n    .glideRight {\n        transition: transform 0.6s ease;\n        transform-style: preserve-3d; /* Necessary to performance on Firefox */\n\n        &.enter {\n            transform: translateX(-100vw);\n        }\n\n        &.enterActive,\n        &.enterDone,\n        &.exit {\n            transform: translateX(0);\n        }\n\n        &.exitActive,\n        &.exitDone {\n            transform: translateX(25vw);\n        }\n    }\n}\n\n@supports (-webkit-touch-callout: none) {\n    .glideRight {\n        position: relative;\n        transition: left 0.6s ease;\n\n        &.enter {\n            left: -100vw;\n        }\n\n        &.enterActive,\n        &.enterDone,\n        &.exit {\n            left: 0;\n        }\n\n        &.exitActive,\n        &.exitDone {\n            left: 25vw;\n        }\n    }\n}\n"]}]);
 // Exports
 exports.locals = {
+	"container": "PageTransition_container__1X9Cc",
 	"fade": "PageTransition_fade__2ObpC",
 	"enter": "PageTransition_enter__8z6yq",
 	"enterActive": "PageTransition_enterActive__3BzXp",
@@ -40842,23 +40957,6 @@ exports.locals = {
 	"exitActive": "PageTransition_exitActive__1nGYR",
 	"exitDone": "PageTransition_exitDone__GIlY9",
 	"glideRight": "PageTransition_glideRight__aVErR"
-};
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./pages/_app.module.css":
-/*!**********************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-oneOf-2-1!./node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./pages/_app.module.css ***!
-  \**********************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
-// Module
-exports.push([module.i, "._app_pageSwapper__2F0CO {\n    width: 100%;\n    overflow-x: hidden;\n}\n", "",{"version":3,"sources":["/Users/satazor/Work/moxy.org/react-page-swapper/demo/pages/_app.module.css"],"names":[],"mappings":"AAAA;IACI,WAAW;IACX,kBAAkB;AACtB","file":"_app.module.css","sourcesContent":[".pageSwapper {\n    width: 100%;\n    overflow-x: hidden;\n}\n"]}]);
-// Exports
-exports.locals = {
-	"pageSwapper": "_app_pageSwapper__2F0CO"
 };
 
 /***/ }),
@@ -79275,8 +79373,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_scroll_behavior__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_scroll_behavior__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _global_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./_global.css */ "./pages/_global.css");
 /* harmony import */ var _global_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_global_css__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _app_module_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./_app.module.css */ "./pages/_app.module.css");
-/* harmony import */ var _app_module_css__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_app_module_css__WEBPACK_IMPORTED_MODULE_10__);
 
 
 var _this = undefined,
@@ -79292,20 +79388,6 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
-
-
-var getNextHref = function getNextHref(pathname) {
-  switch (pathname) {
-    case '/':
-      return '/page2';
-
-    case '/page2':
-      return '/page3';
-
-    default:
-      return '/';
-  }
-};
 
 var App = function App(_ref) {
   var _router$query$animati;
@@ -79327,14 +79409,14 @@ var App = function App(_ref) {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34,
+      lineNumber: 25,
       columnNumber: 13
     }
   }, __jsx("title", {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35,
+      lineNumber: 26,
       columnNumber: 17
     }
   }, "@moxy/react-page-swapper demo"), __jsx("meta", {
@@ -79343,34 +79425,33 @@ var App = function App(_ref) {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36,
+      lineNumber: 27,
       columnNumber: 17
     }
   })), __jsx(_components_theme_provider__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39,
+      lineNumber: 30,
       columnNumber: 13
     }
   }, __jsx(_moxy_react_page_swapper__WEBPACK_IMPORTED_MODULE_5__["default"], {
     updateScroll: function updateScroll() {
       return scrollBehavior.updateScroll();
     },
-    className: _app_module_css__WEBPACK_IMPORTED_MODULE_10___default.a.pageSwapper,
     node: __jsx(Component, Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __self: _this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 43,
+        lineNumber: 33,
         columnNumber: 28
       }
     })),
-    animation: (_router$query$animati = router.query.animation) !== null && _router$query$animati !== void 0 ? _router$query$animati : 'none',
+    animation: Object(_moxy_react_page_swapper__WEBPACK_IMPORTED_MODULE_5__["isPopState"])() ? 'none' : (_router$query$animati = router.query.animation) !== null && _router$query$animati !== void 0 ? _router$query$animati : 'none',
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40,
+      lineNumber: 31,
       columnNumber: 17
     }
   }, function (props) {
@@ -79378,18 +79459,10 @@ var App = function App(_ref) {
       __self: _this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 45,
+        lineNumber: 35,
         columnNumber: 34
       }
     }));
-  }), __jsx(_components__WEBPACK_IMPORTED_MODULE_7__["AnimationPicker"], {
-    nextHref: getNextHref(router.pathname),
-    __self: _this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 48,
-      columnNumber: 17
-    }
   })));
 };
 
@@ -79398,67 +79471,6 @@ App.propTypes = {
   pageProps: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (App);
-
-/***/ }),
-
-/***/ "./pages/_app.module.css":
-/*!*******************************!*\
-  !*** ./pages/_app.module.css ***!
-  \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var content = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-oneOf-2-1!../node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./_app.module.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./pages/_app.module.css");
-
-if (typeof content === 'string') {
-  content = [[module.i, content, '']];
-}
-
-var options = {}
-
-options.insert = function(element){// These elements should always exist. If they do not,
-// this code should fail.
-var anchorElement=document.querySelector('#__next_css__DO_NOT_USE__');var parentNode=anchorElement.parentNode;// Normally <head>
-// Each style tag should be placed right before our
-// anchor. By inserting before and not after, we do not
-// need to track the last inserted element.
-parentNode.insertBefore(element,anchorElement)// Remember: this is development only code.
-//
-// After styles are injected, we need to remove the
-// <style> tags that set `body { display: none; }`.
-//
-// We use `requestAnimationFrame` as a way to defer
-// this operation since there may be multiple style
-// tags.
-;(self.requestAnimationFrame||setTimeout)(function(){for(var x=document.querySelectorAll('[data-next-hide-fouc]'),i=x.length;i--;){x[i].parentNode.removeChild(x[i]);}});};
-options.singleton = false;
-
-var update = __webpack_require__(/*! ../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js")(content, options);
-
-if (content.locals) {
-  module.exports = content.locals;
-}
-
-if (true) {
-  if (!content.locals) {
-    module.hot.accept(
-      /*! !../node_modules/css-loader/dist/cjs.js??ref--5-oneOf-2-1!../node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./_app.module.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./pages/_app.module.css",
-      function () {
-        var newContent = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-oneOf-2-1!../node_modules/next/dist/compiled/postcss-loader??__nextjs_postcss!./_app.module.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/next/dist/compiled/postcss-loader/index.js?!./pages/_app.module.css");
-
-        if (typeof newContent === 'string') {
-          newContent = [[module.i, newContent, '']];
-        }
-        
-        update(newContent);
-      }
-    )
-  }
-
-  module.hot.dispose(function() { 
-    update();
-  });
-}
 
 /***/ }),
 
