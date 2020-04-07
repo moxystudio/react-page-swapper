@@ -34,7 +34,7 @@ it('should call children correctly', () => {
     });
 });
 
-it('should set transitioning correctly when entering & exiting', () => {
+it('should set transitioning correctly when entering & exiting', async () => {
     render(
         <SwapTransition { ...props } in>
             { children }
@@ -55,6 +55,17 @@ it('should set transitioning correctly when entering & exiting', () => {
     expect(children).toHaveBeenCalledTimes(1);
     expect(children.mock.calls[0][0].transitioning).toBe(true);
 
+    // Calling `onEnter` should change `transitioning` to false
+    const { onEntered } = children.mock.calls[0][0];
+
+    children.mockClear();
+    onEntered();
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+
+    expect(children).toHaveBeenCalledTimes(1);
+    expect(children.mock.calls[0][0].transitioning).toBe(false);
+
     children.mockClear();
 
     rerender(
@@ -66,7 +77,36 @@ it('should set transitioning correctly when entering & exiting', () => {
     expect(children).toHaveBeenCalledTimes(1);
     expect(children.mock.calls[0][0].transitioning).toBe(true);
 
-    // TODO:
+    // Calling `onExit` should not change `transitioning` nor re-render
+    const { onExited } = children.mock.calls[0][0];
+
+    children.mockClear();
+    onExited();
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+
+    expect(children).toHaveBeenCalledTimes(0);
+});
+
+it('should not change transitioning if in is unchanged on re-render', () => {
+    const { rerender } = render(
+        <SwapTransition { ...props } in hasPrevNode>
+            { children }
+        </SwapTransition>,
+    );
+
+    expect(children).toHaveBeenCalledTimes(1);
+    expect(children.mock.calls[0][0].transitioning).toBe(true);
+
+    children.mockClear();
+
+    rerender(
+        <SwapTransition { ...props } in hasPrevNode>
+            { children }
+        </SwapTransition>,
+    );
+
+    expect(children).toHaveBeenCalledTimes(0);
 });
 
 it('should not re-render on TransitionGroup injected properties', () => {

@@ -27,10 +27,12 @@ export default class SwapTransition extends Component {
     static getDerivedStateFromProps(props, state) {
         let transitioning;
 
-        if (props.in && state.in === undefined) {
-            transitioning = props.hasPrevNode;
+        // Transitioning is set to true if the `in` prop changed
+        // There's an exception which is when mounting, which we take into consideration the `hasPrevNode` prop
+        if (props.in !== state.in) {
+            transitioning = state.in == null ? props.hasPrevNode : true;
         } else {
-            transitioning = props.in !== state.in;
+            transitioning = state.transitioning;
         }
 
         return {
@@ -89,6 +91,8 @@ export default class SwapTransition extends Component {
 
         await Promise.resolve();
 
+        // `transitioning` is not changed to false as the view will be unmounted afterwards.
+        // This effectively avoids one useless re-render.
         onExited?.();
     }));
 }
