@@ -1,80 +1,94 @@
 import { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
-import { pick } from 'lodash';
 import shallowequal from 'shallowequal';
-
-const PROP_NAMES = ['children', 'node', 'nodeKey', 'animation', 'transitioning', 'in', 'onEntered', 'onExited', 'children'];
+import { omit } from 'lodash';
+import memoizeOne from 'memoize-one';
+import once from 'once';
 
 export default class SwapTransition extends Component {
     static propTypes = {
         node: PropTypes.element.isRequired,
         nodeKey: PropTypes.string.isRequired,
+        hasPrevNode: PropTypes.bool,
         animation: PropTypes.string,
-        transitioning: PropTypes.bool.isRequired,
         in: PropTypes.bool,
-        onEntered: PropTypes.func.isRequired,
-        onExited: PropTypes.func.isRequired,
+        style: PropTypes.object,
+        onEntered: PropTypes.func,
+        onExited: PropTypes.func,
         children: PropTypes.func.isRequired,
     };
 
     static defaultProps = {
+        hasPrevNode: false,
         in: false,
+        style: {},
     };
 
     static getDerivedStateFromProps(props, state) {
-        let style;
+        let transitioning;
 
-        if (!props.in && state.props.in && state.myself) {
-            const node = findDOMNode(state.myself);
-
-            if (node) {
-                const width = parseInt(getComputedStyle(node).width, 10);
-                const height = parseInt(getComputedStyle(node).height, 10);
-                const { top, left } = node.getBoundingClientRect();
-                const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
-                const clipPath = `polygon(${-left + windowWidth}px ${-top}px, ${-left + windowWidth}px ${-top + windowHeight}px, ${-left}px ${-top + windowHeight}px, ${-left}px ${-top}px)`;
-
-                style = {
-                    position: 'fixed',
-                    top,
-                    left,
-                    width,
-                    height,
-                    pointerEvents: 'none',
-                    clipPath,
-                    WebkitClipPath: clipPath,
-                };
-            }
+        if (props.in && state.in === undefined) {
+            transitioning = props.hasPrevNode;
+        } else {
+            transitioning = props.in !== state.in;
         }
 
         return {
-            props: pick(props, PROP_NAMES),
-            style: style ?? { position: 'relative' },
+            // Transition group adds this properties, so we filter them out
+            ...omit(props, ['appear', 'enter', 'exit', 'onExited']),
+            // `onExited` is persisted across re-render because TransitionGroup is changing it
+            // unnecessarily in every new render
+            onExited: state.onExited || props.onExited,
+            transitioning,
         };
     }
 
     state = {
-        props: {},
-        myself: undefined,
-        style: {},
+        transitioning: false,
     };
 
-    componentDidMount() {
-        this.setState({ myself: this });
-    }
-
     shouldComponentUpdate(prevProps, prevState) {
-        return !shallowequal(this.state.style, prevState.style) || !shallowequal(this.state.props, prevState.props);
+        // Only update when state changes, which was derived in `getDerivedStateFromProps`
+        return !shallowequal(this.state, prevState);
     }
 
     render() {
-        const { style, props } = this.state;
-        const { children, ...rest } = props;
+        const { hasPrevNode, children, in: inProp, transitioning, onEntered, onExited, ...rest } = this.state;
 
         return children({
             ...rest,
-            style,
+            in: inProp,
+            transitioning,
+            onEntered: this.wrapOnEntered(onEntered),
+            onExited: this.wrapOnExited(onExited),
         });
     }
+
+    // eslint-disable-next-line react/sort-comp
+    wrapOnEntered = memoizeOne((onEntered) => once(async () => {
+        const { in: inProp, transitioning } = this.state;
+
+        if (!inProp || !transitioning) {
+            return;
+        }
+
+        await Promise.resolve();
+
+        this.setState({ transitioning: false }, () => {
+            onEntered?.();
+        });
+    }));
+
+    // eslint-disable-next-line react/sort-comp
+    wrapOnExited = memoizeOne((onExited) => once(async () => {
+        const { in: inProp, transitioning } = this.state;
+
+        if (inProp || !transitioning) {
+            return;
+        }
+
+        await Promise.resolve();
+
+        onExited?.();
+    }));
 }

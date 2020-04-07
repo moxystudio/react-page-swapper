@@ -36,10 +36,12 @@
     "postrelease": "git push --follow-tags origin HEAD && npm publish"
   },
   "peerDependencies": {
-    "react": "^16.8.0"
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
   },
   "dependencies": {
     "lodash": "^4.17.15",
+    "memoize-one": "^5.1.1",
     "once": "^1.4.0",
     "prop-types": "^15.7.2",
     "react-transition-group": "^4.3.0",

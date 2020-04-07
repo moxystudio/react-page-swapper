@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, createRef } from 'react';
+import { findDOMNode } from 'react-dom';
 import { TransitionGroup } from 'react-transition-group';
-import once from 'once';
+import PropTypes from 'prop-types';
+import { omit } from 'lodash';
+import memoizeOne from 'memoize-one';
 import SwapTransition from './SwapTransition';
-import lockSize from './lock-size';
 import { getRandomNodeKey } from './node-key';
+import { lockContainerSize, buildEnterStyle, buildExitStyle } from './layout';
 
 export default class PageSwapper extends Component {
     static propTypes = {
@@ -12,14 +14,20 @@ export default class PageSwapper extends Component {
         nodeKey: PropTypes.string,
         animation: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
         children: PropTypes.func.isRequired,
+        updateScroll: PropTypes.func,
         onSwapBegin: PropTypes.func,
         onSwapEnd: PropTypes.func,
     };
 
-    state = {};
+    static defaultProps = {
+        updateScroll: () => window.scrollTo(0, 0),
+    };
 
+    state = {};
+    containerRef = createRef();
+    ref = createRef();
     remainingSwapAcks = 0;
-    unlockBodySize = undefined;
+    raf;
 
     constructor(props) {
         super(props);
@@ -34,24 +42,28 @@ export default class PageSwapper extends Component {
     }
 
     componentWillUnmount() {
-        this.unlockBodySize?.();
+        cancelAnimationFrame(this.raf);
     }
 
     render() {
         const { children } = this.props;
-        const { node, nodeKey, animation, transitioning, handleEntered, handleExited } = this.state;
+        const { node, nodeKey, prevNodeKey, animation, style } = this.state;
 
         return (
-            <TransitionGroup component={ null }>
+            <TransitionGroup
+                ref={ this.containerRef }
+                { ...this.buildContainerProps(this.props) }>
                 { nodeKey && (
                     <SwapTransition
                         key={ nodeKey }
                         node={ node }
                         nodeKey={ nodeKey }
+                        hasPrevNode={ !!prevNodeKey }
                         animation={ animation }
-                        transitioning={ transitioning }
-                        onEntered={ handleEntered }
-                        onExited={ handleExited }>
+                        style={ style }
+                        ref={ this.handleRef }
+                        onEntered={ this.handleEnteredOrExited }
+                        onExited={ this.handleEnteredOrExited }>
                         { children }
                     </SwapTransition>
                 ) }
@@ -70,71 +82,85 @@ export default class PageSwapper extends Component {
         return nodeKey !== currentNodeKey;
     }
 
-    buildState() {
-        const { node, animation } = this.props;
-        const { nodeKey: currentNodeKey } = this.state;
-
-        const nodeKey = this.props.nodeKey ?? getRandomNodeKey(node);
-        const animationStr = typeof animation === 'function' ? animation({ prevNodeKey: currentNodeKey, nodeKey }) : animation;
-
-        return {
-            node,
-            nodeKey,
-            prevNodeKey: currentNodeKey,
-            animation: animationStr,
-            transitioning: true,
-            handleEntered: once(() => this.handleEntered(nodeKey)),
-            handleExited: once(() => this.handleExited(nodeKey)),
-        };
-    }
-
     beginSwap() {
-        const { onSwapBegin } = this.props;
+        const state = this.buildState();
+        const { nodeKey, prevNodeKey } = state;
+        const element = findDOMNode(this.ref.current);
+        const containerElement = findDOMNode(this.containerRef.current);
+
+        this.props.onSwapBegin?.({ nodeKey, prevNodeKey });
 
         this.remainingSwapAcks = 2;
-        this.unlockBodySize = lockSize(document.body);
+        cancelAnimationFrame(this.raf);
 
-        onSwapBegin?.();
-
-        const newState = this.buildState();
+        // Prepare exiting, applying the animation and out-of-flow styles
+        const unlockSize = lockContainerSize(containerElement);
 
         this.setState({
-            animation: newState.animation,
+            animation: state.animation,
+            style: buildExitStyle(element),
         }, () => {
-            this.setState(newState);
+            // Need to wait an animation frame so that the styles are applied
+            // This is especially necessary for Safari, to avoid "flickering"
+            this.raf = requestAnimationFrame(() => {
+                // Finally start the swap!
+                this.setState(state, () => {
+                    // Now that we have the current node, it's dimensions are being counted
+                    // towards the document flow, meaning we can now update the scroll
+                    // and unlock size
+                    this.props.updateScroll({ nodeKey, prevNodeKey });
+                    unlockSize();
+                });
+            });
         });
     }
 
     finishSwap() {
-        const { onSwapEnd } = this.props;
+        const { nodeKey, prevNodeKey } = this.state;
 
-        this.unlockBodySize?.();
-        onSwapEnd?.();
+        this.props.onSwapEnd?.({ nodeKey, prevNodeKey });
 
         if (this.isOutOfSync()) {
             this.beginSwap();
         }
     }
 
-    handleEntered = (nodeKey) => {
-        if (this.state.nodeKey !== nodeKey || !this.isSwapping()) {
-            return;
+    buildState() {
+        const { node, animation } = this.props;
+        const { nodeKey: currentNodeKey } = this.state;
+
+        const nodeKey = this.props.nodeKey ?? getRandomNodeKey(node);
+        const animationStr = typeof animation === 'function' ?
+            animation({ prevNodeKey: currentNodeKey, nodeKey }) :
+            animation;
+
+        return {
+            node,
+            nodeKey,
+            prevNodeKey: currentNodeKey,
+            animation: animationStr,
+            style: buildEnterStyle(),
+        };
+    }
+
+    // eslint-disable-next-line react/sort-comp
+    buildContainerProps = memoizeOne((props) => omit(props, [
+        'node',
+        'nodeKey',
+        'animation',
+        'children',
+        'updateScroll',
+        'onSwapBegin',
+        'onSwapEnd',
+    ]));
+
+    handleRef = (ref) => {
+        if (ref) {
+            this.ref.current = ref;
         }
-
-        this.remainingSwapAcks -= 1;
-
-        this.setState({ transitioning: false }, () => {
-            if (!this.isSwapping()) {
-                this.finishSwap();
-            }
-        });
     };
 
-    handleExited = (nodeKey) => {
-        if (this.state.prevNodeKey !== nodeKey || !this.isSwapping()) {
-            return;
-        }
-
+    handleEnteredOrExited = () => {
         this.remainingSwapAcks -= 1;
 
         if (!this.isSwapping()) {

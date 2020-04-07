@@ -5,30 +5,33 @@ describe('getRandomNodeKey()', () => {
     beforeEach(() => {
         let counter = 0;
 
-        jest.spyOn(Math, 'random').mockImplementation(() => {
-            counter += 1;
-
-            return counter * 0.001;
-        });
+        // eslint-disable-next-line no-plusplus
+        jest.spyOn(Math, 'random').mockImplementation(() => (++counter) * 0.00001);
     });
 
     afterEach(() => {
-        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     it('should return a random key for a given node', () => {
         const MyComponent = () => {};
         const MyOtherComponent = () => {};
 
-        expect(getRandomNodeKey(<MyComponent />)).toBe('01anm6c3');
-        expect(getRandomNodeKey(<MyOtherComponent />)).toBe('02lb8co6');
+        expect(getRandomNodeKey(<MyComponent />)).toBe('cre66i9s');
+        expect(getRandomNodeKey(<MyOtherComponent />)).toBe('piscd0jk');
     });
 
     it('should return the same key for the same node', () => {
         const MyComponent = () => {};
 
-        expect(getRandomNodeKey(<MyComponent />)).toBe('01anm6c3');
-        expect(getRandomNodeKey(<MyComponent foo="bar" />)).toBe('01anm6c3');
+        expect(getRandomNodeKey(<MyComponent />)).toBe('cre66i9s');
+        expect(getRandomNodeKey(<MyComponent foo="bar" />)).toBe('cre66i9s');
+    });
+
+    it('should throw if node type is not a component', () => {
+        expect(() => {
+            getRandomNodeKey(<div />);
+        }).toThrow(TypeError, /node type must be a component/i);
     });
 });
 
