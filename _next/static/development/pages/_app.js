@@ -1610,6 +1610,139 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ }),
 
+/***/ "./node_modules/@mapbox/scroll-restorer/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@mapbox/scroll-restorer/index.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var debounce = __webpack_require__(/*! debounce */ "./node_modules/debounce/index.js");
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js");
+var getWindow = __webpack_require__(/*! ./util/get_window */ "./node_modules/@mapbox/scroll-restorer/util/get_window.js").getWindow;
+
+var removeListenerFunctions;
+
+function end() {
+  for (var i = 0, l = removeListenerFunctions.length; i < l; i++) {
+    removeListenerFunctions[i]();
+  }
+}
+
+function getSavedScroll(input) {
+  input = input || getWindow().history;
+  if (!input || !input.state) return;
+  return input.state.scroll;
+}
+
+function restoreScroll(input, attemptsRemaining) {
+  attemptsRemaining = attemptsRemaining == null ? 5 : attemptsRemaining;
+  var savedScroll = getSavedScroll(input);
+  if (!savedScroll) return;
+  getWindow().requestAnimationFrame(function() {
+    var savedX = savedScroll.x;
+    var savedY = savedScroll.y;
+    if (attemptsRemaining === 0) return;
+    var pageXOffset = getWindow().pageXOffset;
+    var pageYOffset = getWindow().pageYOffset;
+    if (
+      savedY < getWindow().document.body.scrollHeight &&
+      (savedX !== pageXOffset || savedY !== pageYOffset)
+    ) {
+      getWindow().scrollTo(savedX, savedY);
+    } else {
+      restoreScroll(input, attemptsRemaining - 1);
+    }
+  });
+}
+
+function start(options) {
+  options = xtend(
+    {
+      autoRestore: true,
+      captureScrollDebounce: 50
+    },
+    options || {}
+  );
+
+  var captureScroll = debounce(function() {
+    getWindow().requestAnimationFrame(function() {
+      var x = getWindow().pageXOffset;
+      var y = getWindow().pageYOffset;
+      var historyState = getWindow().history.state;
+      var savedX = historyState && historyState.scroll && historyState.scroll.x;
+      var savedY = historyState && historyState.scroll && historyState.scroll.y;
+      if (savedX !== x || savedY !== y) {
+        var nextHistoryState = xtend(historyState, {
+          scroll: { x: x, y: y }
+        });
+        getWindow().history.replaceState(
+          nextHistoryState,
+          null,
+          getWindow().location
+        );
+      }
+    });
+  }, options.captureScrollDebounce);
+
+  // cf. https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration
+  if ('scrollRestoration' in getWindow().history) {
+    getWindow().history.scrollRestoration = 'manual';
+  }
+
+  // Scroll positions are saved into the history entry's state; then when that
+  // the history changes (the popstate event), we try restoring any saved
+  // scroll position.
+
+  getWindow().addEventListener('scroll', captureScroll, { passive: true });
+  if (options.autoRestore) {
+    getWindow().addEventListener('popstate', restoreScroll);
+  }
+
+  removeListenerFunctions = [
+    function() {
+      getWindow().removeEventListener('scroll', captureScroll, {
+        passive: true
+      });
+    }
+  ];
+  if (options.autoRestore) {
+    removeListenerFunctions.push(function() {
+      getWindow().removeEventListener('popstate', restoreScroll);
+    });
+  }
+}
+
+module.exports = {
+  start: start,
+  end: end,
+  restoreScroll: restoreScroll,
+  getSavedScroll: getSavedScroll
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/@mapbox/scroll-restorer/util/get_window.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@mapbox/scroll-restorer/util/get_window.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// This makes window mockable in Jest tests
+function getWindow() {
+  return window;
+}
+
+module.exports = { getWindow: getWindow };
+
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/esm/AppBar/AppBar.js":
 /*!*************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/AppBar/AppBar.js ***!
@@ -41462,6 +41595,87 @@ function supportedValue(property, value) {
 
 /***/ }),
 
+/***/ "./node_modules/debounce/index.js":
+/*!****************************************!*\
+  !*** ./node_modules/debounce/index.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Returns a function, that, as long as it continues to be invoked, will not
+ * be triggered. The function will be called after it stops being called for
+ * N milliseconds. If `immediate` is passed, trigger the function on the
+ * leading edge, instead of the trailing. The function also has a property 'clear' 
+ * that is a function which will clear the timer to prevent previously scheduled executions. 
+ *
+ * @source underscore.js
+ * @see http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
+ * @param {Function} function to wrap
+ * @param {Number} timeout in ms (`100`)
+ * @param {Boolean} whether to execute at the beginning (`false`)
+ * @api public
+ */
+function debounce(func, wait, immediate){
+  var timeout, args, context, timestamp, result;
+  if (null == wait) wait = 100;
+
+  function later() {
+    var last = Date.now() - timestamp;
+
+    if (last < wait && last >= 0) {
+      timeout = setTimeout(later, wait - last);
+    } else {
+      timeout = null;
+      if (!immediate) {
+        result = func.apply(context, args);
+        context = args = null;
+      }
+    }
+  };
+
+  var debounced = function(){
+    context = this;
+    args = arguments;
+    timestamp = Date.now();
+    var callNow = immediate && !timeout;
+    if (!timeout) timeout = setTimeout(later, wait);
+    if (callNow) {
+      result = func.apply(context, args);
+      context = args = null;
+    }
+
+    return result;
+  };
+
+  debounced.clear = function() {
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+  
+  debounced.flush = function() {
+    if (timeout) {
+      result = func.apply(context, args);
+      context = args = null;
+      
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+
+  return debounced;
+};
+
+// Adds compatibility for ES modules
+debounce.debounce = debounce;
+
+module.exports = debounce;
+
+
+/***/ }),
+
 /***/ "./node_modules/dom-helpers/esm/addClass.js":
 /*!**************************************************!*\
   !*** ./node_modules/dom-helpers/esm/addClass.js ***!
@@ -61302,6 +61516,36 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ "./node_modules/xtend/immutable.js":
+/*!*****************************************!*\
+  !*** ./node_modules/xtend/immutable.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = extend
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+function extend() {
+    var target = {}
+
+    for (var i = 0; i < arguments.length; i++) {
+        var source = arguments[i]
+
+        for (var key in source) {
+            if (hasOwnProperty.call(source, key)) {
+                target[key] = source[key]
+            }
+        }
+    }
+
+    return target
+}
+
+
+/***/ }),
+
 /***/ "./pages/_app.js":
 /*!***********************!*\
   !*** ./pages/_app.js ***!
@@ -61323,16 +61567,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! next/head */ "./node_modules/next/dist/next-server/lib/head.js");
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _moxy_react_page_swapper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @moxy/react-page-swapper */ "./node_modules/@moxy/react-page-swapper/es/index.js");
-/* harmony import */ var _components_theme_provider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/theme-provider */ "./components/theme-provider/index.js");
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components */ "./components/index.js");
-/* harmony import */ var _app_module_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./_app.module.css */ "./pages/_app.module.css");
-/* harmony import */ var _app_module_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_app_module_css__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _mapbox_scroll_restorer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mapbox/scroll-restorer */ "./node_modules/@mapbox/scroll-restorer/index.js");
+/* harmony import */ var _mapbox_scroll_restorer__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_mapbox_scroll_restorer__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _components_theme_provider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/theme-provider */ "./components/theme-provider/index.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components */ "./components/index.js");
+/* harmony import */ var _app_module_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./_app.module.css */ "./pages/_app.module.css");
+/* harmony import */ var _app_module_css__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_app_module_css__WEBPACK_IMPORTED_MODULE_10__);
 
 
 var _this = undefined,
     _jsxFileName = "/Users/satazor/Work/moxy.org/react-page-swapper/demo/pages/_app.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
 
 
 
@@ -61356,53 +61603,74 @@ var App = function App(_ref) {
     }
   }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
-    history.scrollRestoration = 'manual';
-  });
+    _mapbox_scroll_restorer__WEBPACK_IMPORTED_MODULE_7___default.a.start({
+      autoRestore: false
+    });
+  }, []);
+  var handleSwapBegin = Object(react__WEBPACK_IMPORTED_MODULE_2__["useCallback"])(function () {
+    _mapbox_scroll_restorer__WEBPACK_IMPORTED_MODULE_7___default.a.end();
+  }, []);
+  var handleSwapEnd = Object(react__WEBPACK_IMPORTED_MODULE_2__["useCallback"])(function () {
+    _mapbox_scroll_restorer__WEBPACK_IMPORTED_MODULE_7___default.a.start();
+  }, []);
+  var updateScroll = Object(react__WEBPACK_IMPORTED_MODULE_2__["useCallback"])(function () {
+    var scroll = _mapbox_scroll_restorer__WEBPACK_IMPORTED_MODULE_7___default.a.getSavedScroll();
+    console.log('>scroll', scroll);
+
+    if (!scroll) {
+      window.scrollTo(0, 0);
+    } else {
+      _mapbox_scroll_restorer__WEBPACK_IMPORTED_MODULE_7___default.a.restoreScroll();
+    }
+  }, []);
   var router = Object(next_router__WEBPACK_IMPORTED_MODULE_4__["useRouter"])();
   return __jsx(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_5___default.a, {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28,
+      lineNumber: 49,
       columnNumber: 13
     }
   }, __jsx("title", {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29,
+      lineNumber: 50,
       columnNumber: 17
     }
-  }, "@moxy/react-page-swapper demo")), __jsx(_components_theme_provider__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, "@moxy/react-page-swapper demo")), __jsx(_components_theme_provider__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32,
+      lineNumber: 53,
       columnNumber: 13
     }
   }, __jsx(_moxy_react_page_swapper__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    className: _app_module_css__WEBPACK_IMPORTED_MODULE_9___default.a.pageSwapper,
+    className: _app_module_css__WEBPACK_IMPORTED_MODULE_10___default.a.pageSwapper,
     node: __jsx(Component, Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __self: _this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 35,
+        lineNumber: 56,
         columnNumber: 28
       }
     })),
     animation: (_router$query$animati = router.query.animation) !== null && _router$query$animati !== void 0 ? _router$query$animati : 'none',
+    updateScroll: updateScroll,
+    onSwapBegin: handleSwapBegin,
+    onSwapEnd: handleSwapEnd,
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33,
+      lineNumber: 54,
       columnNumber: 17
     }
   }, function (props) {
-    return __jsx(_components__WEBPACK_IMPORTED_MODULE_8__["PageTransition"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+    return __jsx(_components__WEBPACK_IMPORTED_MODULE_9__["PageTransition"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
       __self: _this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 37,
+        lineNumber: 61,
         columnNumber: 34
       }
     }));
