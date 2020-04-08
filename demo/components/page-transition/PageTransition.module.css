@@ -45,6 +45,7 @@
 @supports (-webkit-touch-callout: none) {
     .slideLeft {
         position: relative;
+        transition: left 0.6s;
 
         &.enter {
             left: 100vw;
