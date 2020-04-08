@@ -234,7 +234,7 @@ In advanced scenarios, such as nested routes, `node` is a node from a react tree
 Type: `string` (*required*)   
 Default: *random but deterministic*
 
-A unique key that identifies the `node`. If omitted, a random key node will be generated based on the node's component type. In advanced scenarios, you may specify a key such as one based on the route path or `location.pathname`. You may take a look at [`getNodeKeyFromPathname()`](#getnodekeyfrompathnamelevel-pathnames) to see if it's useful for your use-case.
+A unique key that identifies the `node`. If omitted, a random key node will be generated based on the node's component type. In advanced scenarios, you may specify a key such as one based on the route path or `location.pathname`. You may take a look at [`getNodeKeyFromPathname()`](#getnodekeyfrompathnamelevel-pathname) to see if it's useful for your use-case.
 
 #### animation
 
@@ -337,7 +337,7 @@ import { isPopState } from '@moxy/react-page-swapper';
 
 const animation = isPopState() ? 'none' : 'fade';
 
-// and then code the 'none' animation to be a dummy one that finishes instantly.
+// and then code the 'none' animation to be a dummy one that finishes instantly
 ```
 
 ## Tests
