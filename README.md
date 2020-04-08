@@ -200,15 +200,16 @@ export default App;
 
   ```css
   @supports not (-webkit-touch-callout: none) {
-    /* Target all browsers except iOS Safari */
+      /* Target all browsers except iOS Safari */
   }
 
   @supports (-webkit-touch-callout: none) {
-    /* Target only iOS Safari */
+      /* Target only iOS Safari */
   }
   ```
 
-  > ⚠️ If you are indeed using `top` and `left`, they will conflict with the `style` property from the render prop function. One way to circumvent  this is to create a wrapper and apply the `style` property in that element instead.
+  > ⚠️ If you are indeed using `top` and `left`, they will conflict with the `style` property from the render prop function. One way to circumvent  this is to create a wrapper and apply the `style` property to that element instead.
+
   > ⚠️ The `@supports` CSS rule is not supported in Internet Explorer.
 </details>
 
