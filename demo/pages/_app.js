@@ -27,7 +27,6 @@ const App = ({ Component, pageProps }) => {
         <>
             <Head>
                 <title>@moxy/react-page-swapper demo</title>
-                <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
             </Head>
 
             <ThemeProvider>

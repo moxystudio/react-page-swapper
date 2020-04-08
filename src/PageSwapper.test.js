@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import PageSwapper from './PageSwapper';
 
-const Page1 = () => <h1>Page 1</h1>;
-const Page2 = () => <h1>Page 2</h1>;
+const Page1 = () => <h1 tabIndex="1">Page 1</h1>;
+const Page2 = () => <h1 tabIndex="1">Page 2</h1>;
 
 beforeAll(() => {
     let counter = 0;
@@ -413,6 +413,36 @@ it('should lock / unlock container size when swapping', async () => {
     expect(element.style.minHeight).toBe('');
 });
 
+it('should blur active element when swapping', async () => {
+    const children = ({ node }) => node;
+
+    const { rerender, getByText } = render(
+        <PageSwapper
+            className="pageSwapper"
+            node={ <Page1 /> }>
+            { children }
+        </PageSwapper>,
+    );
+
+    const element = getByText('Page 1');
+
+    element.focus();
+
+    jest.spyOn(element, 'blur');
+
+    rerender(
+        <PageSwapper
+            className="pageSwapper"
+            node={ <Page2 /> }>
+            { children }
+        </PageSwapper>,
+    );
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+
+    expect(element.blur).toHaveBeenCalledTimes(1);
+});
+
 it('should update scroll position', async () => {
     const updateScroll = jest.fn();
     const children = ({ node }) => node;
@@ -438,7 +468,7 @@ it('should update scroll position', async () => {
     await new Promise((resolve) => setTimeout(resolve, 50));
 
     expect(updateScroll).toHaveBeenCalledTimes(1);
-    expect(updateScroll).toHaveBeenCalledWith({ nodeKey: 'piscd0jk', prevNodeKey: 'cre66i9s' });
+    expect(updateScroll).toHaveBeenCalledWith({ nodeKey: 'piscd0jk' });
 });
 
 it('should call onSwapBegin and onSwapEnd props correctly', async () => {
@@ -478,7 +508,7 @@ it('should call onSwapBegin and onSwapEnd props correctly', async () => {
     await new Promise((resolve) => setTimeout(resolve, 50));
 
     expect(onSwapBegin).toHaveBeenCalledTimes(1);
-    expect(onSwapBegin).toHaveBeenCalledWith({ nodeKey: 'piscd0jk', prevNodeKey: 'cre66i9s' });
+    expect(onSwapBegin).toHaveBeenCalledWith({ nodeKey: 'cre66i9s', nextNodeKey: 'piscd0jk' });
     expect(onSwapEnd).toHaveBeenCalledTimes(1);
-    expect(onSwapBegin).toHaveBeenCalledWith({ nodeKey: 'piscd0jk', prevNodeKey: 'cre66i9s' });
+    expect(onSwapEnd).toHaveBeenCalledWith({ nodeKey: 'piscd0jk', prevNodeKey: 'cre66i9s' });
 });

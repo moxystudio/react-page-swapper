@@ -88,13 +88,18 @@ export default class PageSwapper extends Component {
         const element = findDOMNode(this.ref.current);
         const containerElement = findDOMNode(this.containerRef.current);
 
-        this.props.onSwapBegin?.({ nodeKey, prevNodeKey });
+        this.props.onSwapBegin?.({ nodeKey: prevNodeKey, nextNodeKey: nodeKey });
 
         this.remainingSwapAcks = 2;
         cancelAnimationFrame(this.raf);
 
-        // Prepare exiting, applying the animation and out-of-flow styles
+        // Prepare exiting:
+        // - Lock the container size
+        // - Blur activeElement if any
+        // - Apply the animation and out-of-flow styles
         const unlockSize = lockContainerSize(containerElement);
+
+        document.activeElement?.blur();
 
         this.setState({
             animation: state.animation,
@@ -105,10 +110,10 @@ export default class PageSwapper extends Component {
             this.raf = requestAnimationFrame(() => {
                 // Finally start the swap!
                 this.setState(state, () => {
-                    // Now that we have the current node, it's dimensions are being counted
+                    // Now that we have the current node, its dimensions are being counted
                     // towards the document flow, meaning we can now update the scroll
                     // and unlock size
-                    this.props.updateScroll({ nodeKey, prevNodeKey });
+                    this.props.updateScroll({ nodeKey });
                     unlockSize();
                 });
             });

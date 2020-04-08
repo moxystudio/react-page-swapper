@@ -36,10 +36,10 @@ export default class SwapTransition extends Component {
         }
 
         return {
-            // Transition group adds this properties, so we filter them out
+            // TransitionGroup adds the properties below, so we filter them out
             ...omit(props, ['appear', 'enter', 'exit', 'onExited']),
-            // `onExited` is persisted across re-render because TransitionGroup is changing it
-            // unnecessarily in every new render
+            // TransitionGroup changes `onExited` in every render unnecessarily,
+            // so we keep it constant to avoid re-renders
             onExited: state.onExited || props.onExited,
             transitioning,
         };
@@ -91,8 +91,8 @@ export default class SwapTransition extends Component {
 
         await Promise.resolve();
 
-        // `transitioning` is not changed to false as the view will be unmounted afterwards.
-        // This effectively avoids one useless re-render.
+        // `transitioning` is not changed to false as the view will be unmounted afterwards
+        // This effectively avoids one useless re-render
         onExited?.();
     }));
 }
