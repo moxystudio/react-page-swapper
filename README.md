@@ -327,15 +327,15 @@ getNodeKeyFromPathname(0, '/blog/[id]') // /blog
 getNodeKeyFromPathname(1, '/blog/[id]') // /blog/[id]
 ```
 
-### isPopState()
+### isHistoryEntryFromPopState()
 
 A utility to know if the current history entry originated from a `popstate` event or not. Useful to disable animations if the user is using the browser's back and forward functionality.
 
 ```js
 // pages/_app.js
-import { isPopState } from '@moxy/react-page-swapper';
+import { isHistoryEntryFromPopState } from '@moxy/react-page-swapper';
 
-const animation = isPopState() ? 'none' : 'fade';
+const animation = isHistoryEntryFromPopState() ? 'none' : 'fade';
 
 // and then code the 'none' animation to be a dummy one that finishes instantly
 ```

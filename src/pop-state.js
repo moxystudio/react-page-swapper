@@ -13,6 +13,6 @@ if (typeof window !== 'undefined') {
     });
 }
 
-const isPopState = () => popState;
+const isHistoryEntryFromPopState = () => popState;
 
-export default isPopState;
+export default isHistoryEntryFromPopState;

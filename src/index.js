@@ -1,3 +1,3 @@
 export { default } from './PageSwapper';
-export { default as isPopState } from './pop-state';
+export { default as isHistoryEntryFromPopState } from './pop-state';
 export { getNodeKeyFromPathname } from './node-key';
