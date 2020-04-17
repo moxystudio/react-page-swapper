@@ -1,0 +1,32 @@
+.home {
+    min-height: 100vh;
+
+    & .section {
+        padding: 20px;
+        min-height: 400px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.section1 {
+            background-color: #f7dba7;
+        }
+
+        &.section2 {
+            background-color: #f1ab86;
+        }
+
+        &.section3 {
+            background-color: #c57b57;
+        }
+
+        &.section4 {
+            background-color: #a63446;
+        }
+
+        &.section5 {
+            background-color: #1e2d2f;
+        }
+    }
+}

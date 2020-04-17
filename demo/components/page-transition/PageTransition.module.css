@@ -1,0 +1,190 @@
+/**
+ * Below you will find `@supports not (-webkit-touch-callout: none)` and `@supports (-webkit-touch-callout: none)` usages.
+ * The first rule targets browsers other than iOS browsers, and the second is the opposite.
+ * We are using it because using `transform` in combination with fixed elements causes flickering in iOS browsers.
+ * To circumvent that, we use non `transform` styles, such as `left` ONLY for iOS browsers.
+ */
+
+/* ==========================================================================
+   Fade
+   ========================================================================== */
+
+.fade {
+    transition: opacity 0.6s;
+
+    &.enter {
+        opacity: 0;
+    }
+
+    &.enterActive,
+    &.enterDone {
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+   Slide left
+   ========================================================================== */
+
+@supports not (-webkit-touch-callout: none) {
+    .slideLeft {
+        transition: transform 0.6s;
+        backface-visibility: hidden;
+
+        &.enter {
+            transform: translateX(100vw);
+        }
+
+        &.enterActive,
+        &.enterDone {
+            transform: translateX(0);
+        }
+    }
+}
+
+@supports (-webkit-touch-callout: none) {
+    .slideLeft {
+        position: relative;
+        transition: left 0.6s;
+
+        &.enter {
+            left: 100vw;
+        }
+
+        &.enterActive,
+        &.enterDone {
+            left: 0;
+        }
+    }
+}
+
+/* ==========================================================================
+   Slide right
+   ========================================================================== */
+
+@supports not (-webkit-touch-callout: none) {
+    .slideRight {
+        transition: transform 0.6s;
+
+        &.enter {
+            transform: translateX(-100vw);
+        }
+
+        &.enterActive,
+        &.enterDone {
+            transform: translateX(0);
+        }
+    }
+}
+
+@supports (-webkit-touch-callout: none) {
+    .slideRight {
+        position: relative;
+        transition: left 0.6s;
+
+        &.enter {
+            left: -100vw;
+        }
+
+        &.enterActive,
+        &.enterDone {
+            left: 0;
+        }
+    }
+}
+
+/* ==========================================================================
+   Glide left
+   ========================================================================== */
+
+@supports not (-webkit-touch-callout: none) {
+    .glideLeft {
+        transition: transform 0.6s;
+        backface-visibility: hidden; /* Necessary because of performance on Firefox */
+
+        &.enter {
+            transform: translateX(100vw);
+        }
+
+        &.enterActive,
+        &.enterDone,
+        &.exit {
+            transform: translateX(0);
+        }
+
+        &.exitActive,
+        &.exitDone {
+            transform: translateX(-25vw);
+        }
+    }
+}
+
+@supports (-webkit-touch-callout: none) {
+    .glideLeft {
+        position: relative;
+        transition: left 0.6s;
+
+        &.enter {
+            left: 100vw;
+        }
+
+        &.enterActive,
+        &.enterDone,
+        &.exit {
+            left: 0;
+        }
+
+        &.exitActive,
+        &.exitDone {
+            left: -25vw;
+        }
+    }
+}
+
+/* ==========================================================================
+   Glide right
+   ========================================================================== */
+
+@supports not (-webkit-touch-callout: none) {
+    .glideRight {
+        transition: transform 0.6s;
+        backface-visibility: hidden; /* Necessary because of performance on Firefox */
+
+        &.enter {
+            transform: translateX(-100vw);
+        }
+
+        &.enterActive,
+        &.enterDone,
+        &.exit {
+            transform: translateX(0);
+        }
+
+        &.exitActive,
+        &.exitDone {
+            transform: translateX(25vw);
+        }
+    }
+}
+
+@supports (-webkit-touch-callout: none) {
+    .glideRight {
+        position: relative;
+        transition: left 0.6s;
+
+        &.enter {
+            left: -100vw;
+        }
+
+        &.enterActive,
+        &.enterDone,
+        &.exit {
+            left: 0;
+        }
+
+        &.exitActive,
+        &.exitDone {
+            left: 25vw;
+        }
+    }
+}

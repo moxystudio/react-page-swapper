@@ -1,0 +1,31 @@
+{
+  "name": "demo",
+  "version": "0.0.0",
+  "description": "Demo website",
+  "main": "index.js",
+  "author": "André Cruz <andre@moxy.studio>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moxystudio/react-page-swapper.git"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.9.8",
+    "@moxy/react-page-swapper": "latest",
+    "classnames": "^2.2.6",
+    "next": "^9.3.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-transition-group": "^4.3.0"
+  },
+  "devDependencies": {
+    "@moxy/postcss-preset": "^4.4.2",
+    "connect-deps": "^0.2.2"
+  }
+}

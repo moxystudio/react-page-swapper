@@ -1,0 +1,9 @@
+.page3 {
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #1ab99b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

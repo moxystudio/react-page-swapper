@@ -1,0 +1,9 @@
+html {
+    min-width: 320px;
+}
+
+body {
+    overflow-y: scroll;
+    margin: 0;
+    background-color: #244444;
+}
