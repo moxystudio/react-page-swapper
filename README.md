@@ -101,7 +101,7 @@ export default App;
 <details>
   <summary>Prevent overflow in the container element</summary>
 
-  If you have horizontal / vertical animations, make sure to elements from overflowing the container. Here's an example to disable horizontal overflow:
+  If you have horizontal / vertical animations, make sure to prevent elements from overflowing the container. Here's an example to disable horizontal overflow:
 
   ```js
   <PageSwapper
@@ -135,7 +135,7 @@ export default App;
   </PageSwapper>
   ```
 
-  ...and then add the `[data-focusable-page-element]` and `tabIndex="-1"` (if needed) attributes to elements of each page that should be immediately focused.
+  ...and then add the `[data-focusable-page-element]` and `tabIndex="-1"` (if needed) attributes to the element, of each page, that should be immediately focused.
 
   2. Use the `transitioning` property of the children render prop:
 
@@ -217,7 +217,7 @@ export default App;
 
 ### &lt;PageSwapper&gt;
 
-`<PageSwapper`> is the default export and is a component that orchestrates the swapping of pages.
+`<PageSwapper>` is the default export and is a component that orchestrates the swapping of pages.
 
 ℹ️ Besides the props described below, any other props will be spread into the container element, allowing you to specify DOM props such as `className`.
 
