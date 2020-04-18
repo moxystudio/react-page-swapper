@@ -32,7 +32,7 @@ However, they are generic solutions and, as a result, they miss important steps 
 
 So, what makes a good page transition library? Here's the fundamental steps to take while swapping pages:
 
-1. Remove the current page from the normal flow of the document, while keeping it exactly in same position and with the same dimensions. This usually involves making it `position: fixed` alongside with `top`, `left`, `width` and `height` CSS properties.
+1. Remove the current page from the normal flow of the document, while keeping it exactly in same position and with the same dimensions. This usually involves making it `position: fixed` and set `top`, `left`, `width` and `height` CSS properties correctly.
 2. Lock the container dimensions by setting `min-width` and `min-height` accordingly. This is needed to maintain the container dimensions since the current page is out of the flow, meaning it will no longer grow its parent.
 3. Render the new page, making it part of the normal flow of the document.
 4. Update the scroll position and unlock the container dimensions that were previously set in step `2.`. Updating the scroll position usually means doing `window.scrollTo(0, 0)` on a new navigation (coming from `history.pushState`) or restoring the scroll position on a `popstate`.
@@ -227,7 +227,7 @@ Type: `ReactElement`
 
 In simple scenarios, this is the page's react element.
 
-In advanced scenarios, such as nested routes, `node` is a node from a react tree. Usually, leaf node are the actual page element and non-leaf nodes are layout elements.
+In advanced scenarios, such as nested routes, `node` is a node from a react tree. Usually, leaf nodes are the actual page element and non-leaf nodes are layout elements.
 
 #### nodeKey
 
