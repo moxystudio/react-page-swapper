@@ -227,7 +227,7 @@ Type: `ReactElement`
 
 In simple scenarios, this is the page's react element.
 
-In advanced scenarios, such as nested routes, `node` is a node from a react tree. Usually, leaf nodes are the actual page element and non-leaf nodes are layout elements.
+In advanced scenarios, such as nested routes, `node` is a node from a react tree. Usually, the leaf node is the page element and non-leaf nodes are layout elements.
 
 #### nodeKey
 
