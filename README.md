@@ -64,7 +64,7 @@ const App = ({ Component, pageProps }) => (
     <PageSwapper
         node={ <Component { ...pageProps } /> }
         animation="fade">
-        { ({ animation, style, in: inProp, onEntered, onExited }) => (
+        { ({ animation, style, in: inProp, onEntered, onExited, node }) => (
             <CSSTransition
                 className={ styles[animation] }
                 style={ style }
