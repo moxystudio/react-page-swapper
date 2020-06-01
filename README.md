@@ -284,6 +284,8 @@ A function called to update the scroll position during a swap. Usually, you do `
 
 We recommend using [`scroll-behavior`](https://github.com/taion/scroll-behavior/) to integrate with the Router you are using, and pass `() => scrollBehavior.updateScroll()` as the `updateScroll` property.
 
+If you are building your application on top of `Next.js` then you may want to integrate this property with [`next-scroll-behavior`](https://github.com/moxystudio/next-scroll-behavior).
+
 #### onSwapBegin
 
 Type: `Function`   
