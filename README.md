@@ -329,7 +329,7 @@ getNodeKeyFromPathname(0, '/blog/[id]') // /blog
 getNodeKeyFromPathname(1, '/blog/[id]') // /blog/[id]
 ```
 
-> ⚠️ Specifying the `pathname` is a must when using certain frameworks. One example is Next.js, where you should use `router.asPath`, otherwise `react-page-swapper` will beging swapping to soon, causing a swap to the same `node`.
+> ⚠️ Specifying the `pathname` is a must when using certain frameworks. One example is Next.js, where you must use `router.asPath`, otherwise `<PageSwapper />` will begin swapping to soon, causing a swap to the same `node`.
 
 ### isHistoryEntryFromPopState()
 
