@@ -329,6 +329,8 @@ getNodeKeyFromPathname(0, '/blog/[id]') // /blog
 getNodeKeyFromPathname(1, '/blog/[id]') // /blog/[id]
 ```
 
+> ⚠️ Specifying the `pathname` is a must when using certain frameworks. One example is Next.js, where you should use `router.asPath`, otherwise `react-page-swapper` will beging swapping to soon, causing a swap to the same `node`.
+
 ### isHistoryEntryFromPopState()
 
 A utility to know if the current history entry originated from a `popstate` event or not. Useful to disable animations if the user is using the browser's back and forward functionality.
