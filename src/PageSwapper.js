@@ -56,7 +56,7 @@ export default class PageSwapper extends Component {
                 { nodeKey && (
                     <SwapTransition
                         key={ nodeKey }
-                        node={ node }
+                        node={ !this.isOutOfSync() && !this.isSwapping() ? this.props.node : node }
                         nodeKey={ nodeKey }
                         hasPrevNode={ !!prevNodeKey }
                         animation={ animation }
