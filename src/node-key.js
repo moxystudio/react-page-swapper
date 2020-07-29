@@ -1,8 +1,8 @@
 const nodeKeySymbol = Symbol();
 
 export const getRandomNodeKey = (node) => {
-    if (process.env.NODE_ENV !== 'production' && typeof node?.type !== 'function') {
-        throw new TypeError('Node type must be a component. Are you passing a DOM node such as <div />?');
+    if (process.env.NODE_ENV !== 'production' && (!['function', 'object'].includes(typeof node?.type))) {
+        throw new TypeError('Node type must be a component. Are you passing a DOM node such as <div /> or a fragment?');
     }
 
     let nodeKey = node.type[nodeKeySymbol];
