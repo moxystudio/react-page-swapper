@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/moxystudio/react-page-swapper/compare/v1.0.0...v1.1.0) (2020-07-29)
+
+
+### Features
+
+* update demo to use scroll restoration ([#3](https://github.com/moxystudio/react-page-swapper/issues/3)) ([8c25e43](https://github.com/moxystudio/react-page-swapper/commit/8c25e43f166aa601892f38ba8aba36348568cf5b))
+
+
+### Bug Fixes
+
+* fix components created with forwardRef and memo ([#10](https://github.com/moxystudio/react-page-swapper/issues/10)) ([b8694f8](https://github.com/moxystudio/react-page-swapper/commit/b8694f89dcbb65e1a32ea6d5a8e9018bedecc5c3))
+
 ## 1.0.0 (2020-04-17)
 
 
