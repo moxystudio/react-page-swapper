@@ -26,7 +26,6 @@
     "react-transition-group": "^4.3.0"
   },
   "devDependencies": {
-    "@moxy/postcss-preset": "^4.4.2",
-    "connect-deps": "^0.2.2"
+    "@moxy/postcss-preset": "^4.4.2"
   }
 }

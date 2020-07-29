@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef, memo } from 'react';
 import { getRandomNodeKey, getNodeKeyFromPathname } from './node-key';
 
 describe('getRandomNodeKey()', () => {
@@ -13,24 +13,33 @@ describe('getRandomNodeKey()', () => {
         jest.restoreAllMocks();
     });
 
-    it('should return a random key for a given node', () => {
+    it('should return the same random key for a given node', () => {
         const MyComponent = () => {};
         const MyOtherComponent = () => {};
-
-        expect(getRandomNodeKey(<MyComponent />)).toBe('cre66i9s');
-        expect(getRandomNodeKey(<MyOtherComponent />)).toBe('piscd0jk');
-    });
-
-    it('should return the same key for the same node', () => {
-        const MyComponent = () => {};
+        const ForwardedMyComponent = forwardRef(() => <MyComponent />);
+        const MemoMyComponent = memo(MyComponent);
 
         expect(getRandomNodeKey(<MyComponent />)).toBe('cre66i9s');
         expect(getRandomNodeKey(<MyComponent foo="bar" />)).toBe('cre66i9s');
+        expect(getRandomNodeKey(<MyOtherComponent />)).toBe('piscd0jk');
+        expect(getRandomNodeKey(<MyOtherComponent foo="bar" />)).toBe('piscd0jk');
+        expect(getRandomNodeKey(<ForwardedMyComponent />)).toBe('12a6ijitc');
+        expect(getRandomNodeKey(<ForwardedMyComponent foo="bar" />)).toBe('12a6ijitc');
+        expect(getRandomNodeKey(<MemoMyComponent />)).toBe('1f1koq134');
+        expect(getRandomNodeKey(<MemoMyComponent foo="bar" />)).toBe('1f1koq134');
     });
 
     it('should throw if node type is not a component', () => {
         expect(() => {
+            getRandomNodeKey('foo');
+        }).toThrow(TypeError, /node type must be a component/i);
+
+        expect(() => {
             getRandomNodeKey(<div />);
+        }).toThrow(TypeError, /node type must be a component/i);
+
+        expect(() => {
+            getRandomNodeKey(<>foo</>);
         }).toThrow(TypeError, /node type must be a component/i);
     });
 });
