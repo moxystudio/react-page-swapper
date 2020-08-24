@@ -36,8 +36,12 @@ export default class PageSwapper extends Component {
     }
 
     componentDidUpdate() {
-        if (this.isOutOfSync() && !this.isSwapping()) {
-            this.beginSwap();
+        if (!this.isSwapping()) {
+            if (this.isOutOfSync()) {
+                this.beginSwap();
+            } else {
+                this.maybeUpdateNode();
+            }
         }
     }
 
@@ -127,6 +131,14 @@ export default class PageSwapper extends Component {
 
         if (this.isOutOfSync()) {
             this.beginSwap();
+        } else {
+            this.maybeUpdateNode();
+        }
+    }
+
+    maybeUpdateNode() {
+        if (this.props.node !== this.state.node) {
+            this.setState({ node: this.props.node });
         }
     }
 

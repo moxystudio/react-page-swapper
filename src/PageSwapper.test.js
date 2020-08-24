@@ -2,8 +2,9 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import PageSwapper from './PageSwapper';
 
-const Page1 = () => <h1 tabIndex="1">Page 1</h1>;
-const Page2 = () => <h1 tabIndex="1">Page 2</h1>;
+const Page1 = () => <main><h1 tabIndex="1">Page 1</h1></main>;
+const Page2 = () => <main><h1 tabIndex="1">Page 2</h1></main>;
+const Page3 = ({ children }) => <main><h1 c="1">Page 3</h1><div>{ children }</div></main>;
 
 beforeAll(() => {
     let counter = 0;
@@ -17,7 +18,7 @@ beforeAll(() => {
 
     style.type = 'text/css';
     style.innerHTML = `
-        h1 {
+        main {
             width: 200px;
             height: 300px;
         }
@@ -317,6 +318,52 @@ it('should wait for inflight swap before starting a new one', async () => {
         style: {
             position: 'relative',
         },
+        in: true,
+        transitioning: false,
+        onEntered: expect.any(Function),
+        onExited: expect.any(Function),
+    });
+});
+
+it('should update node, if nodeKey is the same', async () => {
+    const children = jest.fn(({ node }) => node);
+
+    const { rerender } = render(
+        <PageSwapper
+            node={ <Page3>foo</Page3> }
+            animation="fade">
+            { children }
+        </PageSwapper>,
+    );
+
+    rerender(
+        <PageSwapper
+            node={ <Page3>bar</Page3> }
+            animation="fade">
+            { children }
+        </PageSwapper>,
+    );
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+
+    expect(children).toHaveBeenCalledTimes(2);
+
+    expect(children).toHaveBeenNthCalledWith(1, {
+        node: <Page3>foo</Page3>,
+        nodeKey: '12a6ijitc',
+        animation: 'fade',
+        style: { position: 'relative' },
+        in: true,
+        transitioning: false,
+        onEntered: expect.any(Function),
+        onExited: expect.any(Function),
+    });
+
+    expect(children).toHaveBeenNthCalledWith(2, {
+        node: <Page3>bar</Page3>,
+        nodeKey: '12a6ijitc',
+        animation: 'fade',
+        style: { position: 'relative' },
         in: true,
         transitioning: false,
         onEntered: expect.any(Function),
