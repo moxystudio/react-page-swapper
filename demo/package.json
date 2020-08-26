@@ -17,15 +17,13 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.9.8",
-    "@moxy/next-scroll-behavior": "^1.0.1",
+    "@moxy/next-router-scroll": "^2.0.0",
+    "@moxy/postcss-preset": "^4.5.1",
     "@moxy/react-page-swapper": "latest",
     "classnames": "^2.2.6",
-    "next": "^9.3.4",
+    "next": "^9.5.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-transition-group": "^4.3.0"
-  },
-  "devDependencies": {
-    "@moxy/postcss-preset": "^4.4.2"
   }
 }

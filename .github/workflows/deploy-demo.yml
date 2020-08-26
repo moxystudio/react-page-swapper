@@ -2,8 +2,6 @@ name: Deploy demo
 
 on:
   push:
-    paths:
-      - demo/**/*
     branches:
       - master
 
