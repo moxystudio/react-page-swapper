@@ -39,11 +39,11 @@
     "postrelease": "git push --follow-tags origin HEAD && npm publish"
   },
   "peerDependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react": ">=16.8.0 <18",
+    "react-dom": ">=16.8.0 <18"
   },
   "dependencies": {
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "memoize-one": "^5.1.1",
     "once": "^1.4.0",
     "prop-types": "^15.7.2",
@@ -51,26 +51,26 @@
     "shallowequal": "^1.1.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.11.4",
-    "@commitlint/config-conventional": "^9.1.2",
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@commitlint/config-conventional": "^12.0.1",
     "@moxy/babel-preset": "^3.3.1",
-    "@moxy/eslint-config-babel": "^13.0.0",
-    "@moxy/eslint-config-base": "^13.0.0",
-    "@moxy/eslint-config-jest": "^13.0.0",
-    "@moxy/eslint-config-react": "^13.0.0",
-    "@moxy/jest-config-base": "^5.0.0",
-    "@moxy/jest-config-testing-library": "^5.1.0",
-    "@moxy/jest-config-web": "^5.0.0",
-    "@testing-library/react": "^10.4.9",
-    "commitlint": "^9.1.2",
-    "cross-env": "^7.0.2",
-    "eslint": "^7.0.0",
-    "husky": "^4.0.10",
-    "jest": "^26.0.0",
-    "lint-staged": "^10.0.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "standard-version": "^9.0.0"
+    "@moxy/eslint-config-babel": "^13.0.3",
+    "@moxy/eslint-config-base": "^13.0.3",
+    "@moxy/eslint-config-jest": "^13.0.3",
+    "@moxy/eslint-config-react": "^13.0.3",
+    "@moxy/jest-config-base": "^5.2.0",
+    "@moxy/jest-config-testing-library": "^5.2.0",
+    "@moxy/jest-config-web": "^5.2.0",
+    "@testing-library/react": "^11.2.5",
+    "commitlint": "^12.0.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.22.0",
+    "husky": "^4.3.8",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "standard-version": "^9.1.1"
   }
 }
