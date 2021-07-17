@@ -9,7 +9,7 @@ export default class SwapTransition extends Component {
     static propTypes = {
         node: PropTypes.element.isRequired,
         nodeKey: PropTypes.string.isRequired,
-        hasPrevNode: PropTypes.bool,
+        prevNodeKey: PropTypes.string,
         animation: PropTypes.string,
         in: PropTypes.bool,
         style: PropTypes.object,
@@ -19,7 +19,6 @@ export default class SwapTransition extends Component {
     };
 
     static defaultProps = {
-        hasPrevNode: false,
         in: false,
         style: {},
     };
@@ -30,7 +29,7 @@ export default class SwapTransition extends Component {
         // Transitioning is set to true if the `in` prop changed
         // There's an exception which is when mounting, which we take into consideration the `hasPrevNode` prop
         if (props.in !== state.in) {
-            transitioning = state.in == null ? props.hasPrevNode : true;
+            transitioning = state.in == null ? !!props.prevNodeKey : true;
         } else {
             transitioning = state.transitioning;
         }
@@ -55,12 +54,10 @@ export default class SwapTransition extends Component {
     }
 
     render() {
-        const { hasPrevNode, children, in: inProp, transitioning, onEntered, onExited, ...rest } = this.state;
+        const { children, onEntered, onExited, ...rest } = this.state;
 
         return children({
             ...rest,
-            in: inProp,
-            transitioning,
             onEntered: this.wrapOnEntered(onEntered),
             onExited: this.wrapOnExited(onExited),
         });

@@ -47,7 +47,7 @@ it('should set transitioning correctly when entering & exiting', async () => {
     children.mockClear();
 
     const { rerender } = render(
-        <SwapTransition { ...props } in hasPrevNode>
+        <SwapTransition { ...props } in prevNodeKey="foo">
             { children }
         </SwapTransition>,
     );
@@ -90,7 +90,7 @@ it('should set transitioning correctly when entering & exiting', async () => {
 
 it('should not change transitioning if in is unchanged on re-render', () => {
     const { rerender } = render(
-        <SwapTransition { ...props } in hasPrevNode>
+        <SwapTransition { ...props } in prevNodeKey="foo">
             { children }
         </SwapTransition>,
     );
@@ -101,7 +101,7 @@ it('should not change transitioning if in is unchanged on re-render', () => {
     children.mockClear();
 
     rerender(
-        <SwapTransition { ...props } in hasPrevNode>
+        <SwapTransition { ...props } in prevNodeKey="foo">
             { children }
         </SwapTransition>,
     );
@@ -143,7 +143,7 @@ it('should not re-render when onExited changes, due to TransitionGroup changing 
 
 it('should call onEnter and onExit when transition finishes', async () => {
     const { rerender } = render(
-        <SwapTransition { ...props } in hasPrevNode>
+        <SwapTransition { ...props } in prevNodeKey="foo">
             { children }
         </SwapTransition>,
     );

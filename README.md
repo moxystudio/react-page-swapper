@@ -262,6 +262,7 @@ A render prop that is called for exiting and entering nodes, with the correct co
 | --- | ---- | ----------- |
 | `node` | `ReactElement` | The node to render. |
 | `nodeKey` | `string` | The key associated to the node. |
+| `prevNodeKey` | `string` | The key associated to the previous node, if any. |
 | `animation` | `string` | The animation to apply for the transition. |
 | `style` | `Object` | An object with CSS styles to be applied to the element being transitioned. |
 | `transitioning` | `boolean` | True if the node is transitioning, false otherwise. See note below. |

@@ -117,6 +117,7 @@ it('should swap when node changes', async () => {
     expect(children).toHaveBeenNthCalledWith(2, {
         node: <Page2 />,
         nodeKey: 'piscd0jk',
+        prevNodeKey: 'cre66i9s',
         animation: 'slide',
         style: {
             position: 'relative',
@@ -148,6 +149,7 @@ it('should swap when node changes', async () => {
     expect(children).toHaveBeenNthCalledWith(4, {
         node: <Page2 />,
         nodeKey: 'piscd0jk',
+        prevNodeKey: 'cre66i9s',
         animation: 'slide',
         style: {
             position: 'relative',
@@ -221,6 +223,7 @@ it('should wait for inflight swap before starting a new one', async () => {
     expect(children).toHaveBeenNthCalledWith(2, {
         node: <Page2 />,
         nodeKey: 'piscd0jk',
+        prevNodeKey: 'cre66i9s',
         animation: 'fade',
         style: {
             position: 'relative',
@@ -252,6 +255,7 @@ it('should wait for inflight swap before starting a new one', async () => {
     expect(children).toHaveBeenNthCalledWith(4, {
         node: <Page2 />,
         nodeKey: 'piscd0jk',
+        prevNodeKey: 'cre66i9s',
         animation: 'fade',
         style: {
             position: 'relative',
@@ -265,6 +269,7 @@ it('should wait for inflight swap before starting a new one', async () => {
     expect(children).toHaveBeenNthCalledWith(5, {
         node: <Page2 />,
         nodeKey: 'piscd0jk',
+        prevNodeKey: 'cre66i9s',
         animation: 'slide',
         style: {
             position: 'fixed',
@@ -283,6 +288,7 @@ it('should wait for inflight swap before starting a new one', async () => {
     expect(children).toHaveBeenNthCalledWith(6, {
         node: <Page1 />,
         nodeKey: 'cre66i9s',
+        prevNodeKey: 'piscd0jk',
         animation: 'slide',
         style: {
             position: 'relative',
@@ -296,6 +302,7 @@ it('should wait for inflight swap before starting a new one', async () => {
     expect(children).toHaveBeenNthCalledWith(7, {
         node: <Page2 />,
         nodeKey: 'piscd0jk',
+        prevNodeKey: 'cre66i9s',
         animation: 'slide',
         style: {
             position: 'fixed',
@@ -314,6 +321,7 @@ it('should wait for inflight swap before starting a new one', async () => {
     expect(children).toHaveBeenNthCalledWith(8, {
         node: <Page1 />,
         nodeKey: 'cre66i9s',
+        prevNodeKey: 'piscd0jk',
         animation: 'slide',
         style: {
             position: 'relative',

@@ -62,7 +62,7 @@ export default class PageSwapper extends Component {
                         key={ nodeKey }
                         node={ node }
                         nodeKey={ nodeKey }
-                        hasPrevNode={ !!prevNodeKey }
+                        prevNodeKey={ prevNodeKey }
                         animation={ animation }
                         style={ style }
                         ref={ this.handleRef }
