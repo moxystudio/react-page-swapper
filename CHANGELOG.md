@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/moxystudio/react-page-swapper/compare/v1.1.2...v1.2.0) (2021-07-17)
+
+
+### Features
+
+* add prevNodeKey to children ([899d8d0](https://github.com/moxystudio/react-page-swapper/commit/899d8d0f19bbe0d3bf15bfbdbc0e894cef09ff52))
+
 ### [1.1.2](https://github.com/moxystudio/react-page-swapper/compare/v1.1.1...v1.1.2) (2021-03-23)
 
 ### [1.1.1](https://github.com/moxystudio/react-page-swapper/compare/v1.1.0...v1.1.1) (2020-08-24)
