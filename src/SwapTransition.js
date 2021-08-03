@@ -10,6 +10,7 @@ export default class SwapTransition extends Component {
         node: PropTypes.element.isRequired,
         nodeKey: PropTypes.string.isRequired,
         prevNodeKey: PropTypes.string,
+        mode: PropTypes.oneOf(['simultaneous', 'out-in']).isRequired,
         animation: PropTypes.string,
         in: PropTypes.bool,
         style: PropTypes.object,
