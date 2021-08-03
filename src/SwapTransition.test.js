@@ -6,6 +6,7 @@ const children = jest.fn(({ node }) => node);
 const props = {
     node: <div>foo</div>,
     nodeKey: 'bar',
+    mode: 'simultaneous',
     animation: 'baz',
     style: { position: 'relative' },
     in: true,

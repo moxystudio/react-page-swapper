@@ -12,7 +12,14 @@ export default class PageSwapper extends Component {
     static propTypes = {
         node: PropTypes.element.isRequired,
         nodeKey: PropTypes.string,
-        animation: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+        mode: PropTypes.oneOfType([
+            PropTypes.oneOf(['simultaneous', 'out-in']),
+            PropTypes.func,
+        ]),
+        animation: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.func,
+        ]),
         children: PropTypes.func.isRequired,
         updateScroll: PropTypes.func,
         onSwapBegin: PropTypes.func,
@@ -20,6 +27,7 @@ export default class PageSwapper extends Component {
     };
 
     static defaultProps = {
+        mode: 'simultaneous',
         updateScroll: () => window.scrollTo(0, 0),
     };
 
@@ -28,6 +36,7 @@ export default class PageSwapper extends Component {
     ref = createRef();
     remainingSwapAcks = 0;
     raf;
+    halfSwap;
 
     constructor(props) {
         super(props);
@@ -51,7 +60,7 @@ export default class PageSwapper extends Component {
 
     render() {
         const { children } = this.props;
-        const { node, nodeKey, prevNodeKey, animation, style } = this.state;
+        const { node, nodeKey, prevNodeKey, in: inProp, mode, animation, style } = this.state;
 
         return (
             <TransitionGroup
@@ -60,14 +69,16 @@ export default class PageSwapper extends Component {
                 { nodeKey && (
                     <SwapTransition
                         key={ nodeKey }
+                        in={ inProp }
                         node={ node }
                         nodeKey={ nodeKey }
                         prevNodeKey={ prevNodeKey }
+                        mode={ mode }
                         animation={ animation }
                         style={ style }
                         ref={ this.handleRef }
-                        onEntered={ this.handleEnteredOrExited }
-                        onExited={ this.handleEnteredOrExited }>
+                        onEntered={ this.handleEntered }
+                        onExited={ this.handleExited }>
                         { children }
                     </SwapTransition>
                 ) }
@@ -88,6 +99,7 @@ export default class PageSwapper extends Component {
 
     beginSwap() {
         const state = this.buildState();
+
         const { nodeKey, prevNodeKey } = state;
         const element = findDOMNode(this.ref.current);
         const containerElement = findDOMNode(this.containerRef.current);
@@ -112,14 +124,33 @@ export default class PageSwapper extends Component {
             // Need to wait an animation frame so that the styles are applied
             // This is especially necessary for Safari, to avoid "flickering"
             this.raf = requestAnimationFrame(() => {
-                // Finally start the swap!
-                this.setState(state, () => {
-                    // Now that we have the current node, its dimensions are being counted
-                    // towards the document flow, meaning we can now update the scroll
-                    // and unlock size
-                    this.props.updateScroll({ nodeKey });
-                    unlockSize();
-                });
+                if (state.mode === 'out-in') {
+                    // Finally start the swap by making the current node exit.
+                    this.setState({ node: null, nodeKey: null });
+
+                    // Declare what to do after it exists, which will be used on the handleExited function
+                    this.halfSwap = () => {
+                        // Make the new node enter.
+                        this.setState(state, () => {
+                            // Now that we have the current node, its dimensions are being counted
+                            // towards the document flow, meaning we can now update the scroll
+                            // and unlock size
+                            this.props.updateScroll({ nodeKey });
+                            unlockSize();
+                        });
+                    };
+                } else {
+                    this.halfSwap = undefined;
+
+                    // Finally start the swap!
+                    this.setState(state, () => {
+                        // Now that we have the current node, its dimensions are being counted
+                        // towards the document flow, meaning we can now update the scroll
+                        // and unlock size
+                        this.props.updateScroll({ nodeKey });
+                        unlockSize();
+                    });
+                }
             });
         });
     }
@@ -143,10 +174,13 @@ export default class PageSwapper extends Component {
     }
 
     buildState() {
-        const { node, animation } = this.props;
+        const { node, mode, animation } = this.props;
         const { nodeKey: currentNodeKey } = this.state;
 
         const nodeKey = this.props.nodeKey ?? getRandomNodeKey(node);
+        const modeStr = typeof mode === 'function' ?
+            mode({ prevNodeKey: currentNodeKey, nodeKey }) :
+            mode;
         const animationStr = typeof animation === 'function' ?
             animation({ prevNodeKey: currentNodeKey, nodeKey }) :
             animation;
@@ -155,6 +189,7 @@ export default class PageSwapper extends Component {
             node,
             nodeKey,
             prevNodeKey: currentNodeKey,
+            mode: modeStr,
             animation: animationStr,
             style: buildEnterStyle(),
         };
@@ -164,6 +199,7 @@ export default class PageSwapper extends Component {
     buildContainerProps = memoizeOne((props) => omit(props, [
         'node',
         'nodeKey',
+        'mode',
         'animation',
         'children',
         'updateScroll',
@@ -177,10 +213,20 @@ export default class PageSwapper extends Component {
         }
     };
 
-    handleEnteredOrExited = () => {
+    handleEntered = () => {
         this.remainingSwapAcks -= 1;
 
         if (!this.isSwapping()) {
+            this.finishSwap();
+        }
+    };
+
+    handleExited = () => {
+        this.remainingSwapAcks -= 1;
+
+        if (this.halfSwap) {
+            this.halfSwap();
+        } else {
             this.finishSwap();
         }
     };

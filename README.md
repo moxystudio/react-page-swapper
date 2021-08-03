@@ -236,6 +236,21 @@ Default: *random but deterministic*
 
 A unique key that identifies the `node`. If omitted, a random key node will be generated based on the node's component type. In advanced scenarios, you may specify a key such as one based on the route path or `location.pathname`. You may take a look at [`getNodeKeyFromPathname()`](#getnodekeyfrompathnamelevel-pathname) to see if it's useful for your use-case.
 
+#### mode
+
+Type: `string` or `Function`   
+Default: `simultaneous`
+
+The mode in which the swap will occur, which can be set to `simultaneous` or `out-in`.
+
+When mode is `simultaneous`, the current `node` will transition out at the same time as the new `node` will transition in. In contrast, when mode is `out-in`, the current `node` will transition out first and only then the new `node` will be mounted and transition in. It may be a fixed string or a function to determine it, with the following signature:
+
+```js
+({ nodeKey, prevNodeKey }) => mode;
+```
+
+The function form allows you to select the mode based on the current and previous node keys, making it possible to choose different modes depending on the context.
+
 #### animation
 
 Type: `string` or `Function`
@@ -263,6 +278,7 @@ A render prop that is called for exiting and entering nodes, with the correct co
 | `node` | `ReactElement` | The node to render. |
 | `nodeKey` | `string` | The key associated to the node. |
 | `prevNodeKey` | `string` | The key associated to the previous node, if any. |
+| `mode` | `string` | The swap mode, either `simultaneous` or `out-in`. |
 | `animation` | `string` | The animation to apply for the transition. |
 | `style` | `Object` | An object with CSS styles to be applied to the element being transitioned. |
 | `transitioning` | `boolean` | True if the node is transitioning, false otherwise. See note below. |
