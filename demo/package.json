@@ -21,7 +21,7 @@
     "@moxy/postcss-preset": "^4.5.1",
     "@moxy/react-page-swapper": "latest",
     "classnames": "^2.2.6",
-    "next": "^9.5.2",
+    "next": "^11.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-transition-group": "^4.3.0"
